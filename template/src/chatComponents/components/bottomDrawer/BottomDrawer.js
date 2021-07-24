@@ -82,7 +82,12 @@ const BottomDrawer = () => {
   return (
     <div className="drawer-content ">
       <div id="footerSlideContainer">
-        <button className="chat-button" onClick={handleDrawer}>
+        <button
+          className={
+            selectedLightTheme ? "chat-button" : "chat-button buttonDark"
+          }
+          onClick={handleDrawer}
+        >
           <img src={Bavarder} alt="icon" />
         </button>
         <div
