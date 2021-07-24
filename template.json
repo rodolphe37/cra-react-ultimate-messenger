@@ -38,7 +38,7 @@
     "startMessServer": "cd backends/messages-and-pictures && yarn start",
     "startVidServer": "cd backends/video-chat && npm run dev",
     "initAll": "yarn messServInit && yarn chatVidInit && yarn frontInit",
-    "dev": "cd backends && cd messages-and-pictures && npm start && cd .. & npm run startVidServer & npm start"
+    "dev": "yarn startMessServer && npm run startVidServer & npm start"
 
   },
    "eslintConfig": {
