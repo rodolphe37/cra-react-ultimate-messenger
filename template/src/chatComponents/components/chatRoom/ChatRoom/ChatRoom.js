@@ -630,11 +630,7 @@ const ChatRoom = (props) => {
                           />
                           <Weather />
                         </div>
-                      ) : (
-                        <p style={{ textAlign: "center" }}>
-                          Votre interlocuteur vient de consulter la météo!
-                        </p>
-                      )}
+                      ) : null}
                     </li>
                     <div ref={messagesEndRef} />
                   </span>
