@@ -1,0 +1,43 @@
+{
+  "name": "cra-template-rum",
+  "version": "1.0.0",
+  "license": "(MIT OR Apache-2.0)",
+  "author": "Rodolphe Augusto",
+  "engines": {
+    "node": ">=10"
+  },
+  "main": "template.json",
+  "description": "A quick start Create React App with full chat application and more",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "cra-template",
+    "template",
+    "eslint",
+    "github",
+    "chat app",
+    "messenger",
+    "rodolphe augusto",
+    "prettier"
+  ],
+  "files": [
+    "template",
+    "template.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodolphe37/cra-react-ultimate-messenger.git",
+    "directory": "/"
+  },
+  "bugs": {
+    "url": "https://github.com/rodolphe37/cra-react-ultimate-messenger.git/issues"
+  },
+  "homepage": "https://github.com/rodolphe37/cra-react-ultimate-messenger.git#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

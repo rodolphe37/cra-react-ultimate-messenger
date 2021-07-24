@@ -1,0 +1,135 @@
+.min-max {
+  display: flex;
+  text-align: center;
+  font-size: 14px;
+}
+
+.temp-min {
+  color: blue;
+  margin-right: 15px;
+}
+
+.temp-max {
+  color: red;
+}
+
+.city-feels-like-temp,
+.city-feels-humidity,
+.city-pressure,
+.weather-deg-wind,
+.weather-speed-wind {
+  text-align: center;
+  font-size: 12px;
+}
+
+/* .main-container {
+   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.418)),
+    url("https://i.imgur.com/wRkDzSk.jpg");
+  background-size: cover;
+  background-position: center;
+
+} */
+
+.main-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #000000;
+}
+.main-container > input::placeholder {
+  color: rgb(63, 60, 60) !important;
+}
+
+.search {
+  outline: none;
+  padding: 10px 7%;
+  border-radius: 20px;
+  border: none;
+  margin-bottom: 5%;
+  background: rgba(250, 250, 250, 0.85);
+  width: 99%;
+}
+
+.city {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px 8%;
+  border-radius: 20px;
+  background: rgba(236, 232, 232, 0.85);
+  box-shadow: 10px 10px 5px 0px rgba(15, 15, 15, 0.404);
+}
+
+/* p {
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+} */
+
+.city-temp {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: -29px;
+  margin-left: 63px;
+  text-align: center;
+}
+
+.city sup {
+  font-size: 0.5em;
+}
+
+.city-name {
+  font-size: 0.54em;
+  margin-left: -63px;
+  width: 77px;
+  margin-top: 10px;
+}
+
+.city-name sup {
+  padding: 0.2em 0.6em;
+  margin-left: 0.2em;
+  border-radius: 30px;
+  color: #fff;
+  background: #ff8c00;
+}
+
+.city-icon {
+  width: 100px;
+  height: 100px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .search {
+    padding: 9px 15%;
+    margin-top: 3%;
+  }
+
+  .city {
+    padding: 14px 4%;
+  }
+
+  .main-container {
+    min-height: 130%;
+  }
+}
+.weatherIcon {
+  width: 48px;
+  position: absolute;
+  top: -26px;
+  left: 9px;
+  box-shadow: 1px 0px 4px grey;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+.info > p {
+  margin-top: -19px;
+}

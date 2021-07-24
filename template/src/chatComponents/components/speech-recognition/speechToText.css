@@ -1,0 +1,57 @@
+.heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite both;
+}
+@keyframes heartbeat {
+  from {
+    transform: scale(1);
+    transform-origin: center center;
+    animation-timing-function: ease-out;
+  }
+  10% {
+    transform: scale(0.91);
+    animation-timing-function: ease-in;
+  }
+  17% {
+    transform: scale(0.98);
+    animation-timing-function: ease-out;
+  }
+  33% {
+    transform: scale(0.87);
+    animation-timing-function: ease-in;
+  }
+  45% {
+    transform: scale(1);
+    animation-timing-function: ease-out;
+  }
+}
+
+.microphone-icon-container-on {
+  background: red;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 2px;
+  position: relative;
+}
+.microphone-icon-container-on > .microphone-icon {
+  width: 28px;
+  margin: 10px;
+  position: absolute;
+  bottom: 0;
+  left: -7px;
+  top: -10px;
+}
+.margin-left37 {
+  margin-left: 37px;
+}
+.margin-left22 {
+  margin-left: 22px;
+}
+.reduceInput {
+  width: 138px;
+  margin-right: 4px;
+  transition: all 0.4s ease-in-out;
+}
+.margin-right10 {
+  margin-right: 10px;
+}
