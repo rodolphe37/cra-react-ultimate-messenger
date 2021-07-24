@@ -146,6 +146,13 @@ const ChatRoom = (props) => {
         window.location.replace(`/video/${roomToken}`);
       }, 1200);
     }
+
+    // if (callEnded) {
+    //   messages.pop();
+    //   console.log("messages :", messages);
+    //   // localStorage.setItem("messages", messages);
+    // }
+    // console.log("roomId :", roomId);
   }, [messages, userAllInfos]);
 
   const handleNewMessageChange = (event) => {
@@ -294,7 +301,16 @@ const ChatRoom = (props) => {
       res.body.includes("Invitation vidéo, copiez l'id afin de vous connecter:")
     );
 
+    // if (clickedCopyId) {
+    //   console.log("it's video chat invitation");
+
+    //   console.log("some messages pop :", messages.pop());
+    //   console.log("some messages :", messages);
+    // }
+
+    // setMessages(messages);
     if (someMess.includes(true)) {
+      // console.log("id for chat:", idChatInvitation);
       messages.map((message, i) =>
         setIdChatInvitation(message.body.split(":").pop())
       );
@@ -361,6 +377,12 @@ const ChatRoom = (props) => {
     if (newMessage.includes("#")) {
       setMessageForBot(newMessage);
     }
+    // console.log("message for bot :", messageForBot);
+    // console.log("prompts :", prompts);
+    // console.log("product :", product);
+    // console.log("replies :", replies);
+    // console.log("coronavirus :", coronavirus);
+    // console.log("alternatives :", alternative);
   }, [newMessage, messageForBot]);
 
   return (
@@ -615,9 +637,7 @@ const ChatRoom = (props) => {
                             </Fragment>
                           ))
                         : null}
-                      {message.ownedByCurrentUser &&
-                      message.body.includes("météo") &&
-                      message.body.includes("&") ? (
+                      {message.body.includes("&météo") ? (
                         <div
                           className={
                             message.ownedByCurrentUser ? "weather-content" : ""
@@ -631,6 +651,10 @@ const ChatRoom = (props) => {
                           <Weather />
                         </div>
                       ) : null}
+                      {/*!message.ownedByCurrentUser &&
+                        message.body.includes("météo") &&
+                        !message.body.includes("&") &&
+                      null*/}
                     </li>
                     <div ref={messagesEndRef} />
                   </span>
