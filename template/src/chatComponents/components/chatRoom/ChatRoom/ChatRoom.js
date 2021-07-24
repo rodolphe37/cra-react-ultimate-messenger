@@ -618,7 +618,11 @@ const ChatRoom = (props) => {
                       {message.ownedByCurrentUser &&
                       message.body.includes("météo") &&
                       message.body.includes("&") ? (
-                        <div className="weather-content">
+                        <div
+                          className={
+                            message.ownedByCurrentUser ? "weather-content" : ""
+                          }
+                        >
                           <img
                             src={cloud}
                             alt="cloud"
@@ -626,7 +630,11 @@ const ChatRoom = (props) => {
                           />
                           <Weather />
                         </div>
-                      ) : null}
+                      ) : (
+                        <p style={{ textAlign: "center" }}>
+                          Votre interlocuteur vient de consulter la météo!
+                        </p>
+                      )}
                     </li>
                     <div ref={messagesEndRef} />
                   </span>
