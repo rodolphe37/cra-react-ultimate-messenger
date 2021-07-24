@@ -7,7 +7,7 @@ import ChatRoom from "./chatComponents/components/chatRoom/ChatRoom/ChatRoom";
 import Join from "./chatComponents/components/Join/Join";
 import ButtonChat from "./chatComponents/components/ButtonChat";
 import { useRecoilState } from "recoil";
-import selectedDarkThemeAtom from "./stateManager/atoms/selectedDarkThemeAtom";
+import selectedDarkThemeAtom from "./chatComponents/stateManager/atoms/selectedDarkThemeAtom";
 import VideoChatComponent from "./chatComponents/components/videoChatComponent/VideoChatComponent";
 import Loader from "./chatComponents/components/loader/Loader";
 import { useTranslation } from "react-i18next";
