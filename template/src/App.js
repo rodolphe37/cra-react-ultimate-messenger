@@ -1,18 +1,18 @@
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import HomeChat from "./components/chatRoom/HomeChat/HomeChat";
+import HomeChat from "./chatComponents/components/chatRoom/HomeChat/HomeChat";
 import logo from "./logo.svg";
 import "./App.css";
-import ChatRoom from "./components/chatRoom/ChatRoom/ChatRoom";
-import Join from "./components/Join/Join";
-import ButtonChat from "./components/ButtonChat";
+import ChatRoom from "./chatComponents/components/chatRoom/ChatRoom/ChatRoom";
+import Join from "./chatComponents/components/Join/Join";
+import ButtonChat from "./chatComponents/components/ButtonChat";
 import { useRecoilState } from "recoil";
 import selectedDarkThemeAtom from "./stateManager/atoms/selectedDarkThemeAtom";
-import VideoChatComponent from "./components/videoChatComponent/VideoChatComponent";
-import Loader from "./components/loader/Loader";
+import VideoChatComponent from "./chatComponents/components/videoChatComponent/VideoChatComponent";
+import Loader from "./chatComponents/components/loader/Loader";
 import { useTranslation } from "react-i18next";
-import BottomDrawer from "./components/bottomDrawer/BottomDrawer";
-import Weather from "./components/weatherComponent/WeatherComponent";
+import BottomDrawer from "./chatComponents/components/bottomDrawer/BottomDrawer";
+import Weather from "./chatComponents/components/weatherComponent/WeatherComponent";
 
 const App = () => {
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
