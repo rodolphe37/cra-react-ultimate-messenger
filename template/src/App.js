@@ -5,7 +5,6 @@ import HomeChat from "./chatComponents/components/chatRoom/HomeChat/HomeChat";
 import logo from "./logo.svg";
 import "./App.css";
 import ChatRoom from "./chatComponents/components/chatRoom/ChatRoom/ChatRoom";
-import Join from "./chatComponents/components/Join/Join";
 import ButtonChat from "./chatComponents/components/ButtonChat";
 import { useRecoilState } from "recoil";
 import selectedDarkThemeAtom from "./chatComponents/stateManager/atoms/selectedDarkThemeAtom";
@@ -82,7 +81,6 @@ const App = () => {
       </div>
       <Router>
         <Route path="/" exact component={ButtonChat} />
-        <Route path="/join" component={Join} />
         <Route path="/home" component={HomeChat} />
         <Route path="/chat" component={ChatRoom} />
         <Route path="/video" component={VideoChatComponent} />
