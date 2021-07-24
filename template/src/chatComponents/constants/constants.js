@@ -1,7 +1,7 @@
 // Options the user could type in
 export const prompts = [
   ["salut", "hey", "hello", "bonjour", "bonsoir"],
-  ["comment va tu", "comment va la vie", "comment vont les choses"],
+  ["comment va tu", "comment va la vie", "como esta"],
   ["qu'est-ce que tu fais", "que se passe-t-il", "quoi de neuf"],
   ["quel age a tu"],
   ["bonne journée", "bonne soirée", "bonne nuit"],
@@ -38,9 +38,9 @@ export const prompts = [
 export const replies = [
   ["Salut !", "Bonjour !", "Hey !", "Ola amigo !", "Comment va ?"],
   [
-    "Bien... comment vas-tu ?",
-    "Plutôt bien, comment vas-tu ?",
-    "Fantastique, comment vas-tu ?",
+    "Bien... Et toi, comment vas-tu ?",
+    "Plutôt bien et toi, comment vas-tu ?",
+    "Fantastique et toi, comment vas-tu ?",
   ],
   [
     "Pas grand-chose.",
