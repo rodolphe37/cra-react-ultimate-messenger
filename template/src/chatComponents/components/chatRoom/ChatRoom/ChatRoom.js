@@ -615,17 +615,18 @@ const ChatRoom = (props) => {
                             </Fragment>
                           ))
                         : null}
-                      {message.body.includes("météo") &&
-                        message.body.includes("&") && (
-                          <div className="weather-content">
-                            <img
-                              src={cloud}
-                              alt="cloud"
-                              className="weatherIcon"
-                            />
-                            <Weather />
-                          </div>
-                        )}
+                      {message.ownedByCurrentUser &&
+                      message.body.includes("météo") &&
+                      message.body.includes("&") ? (
+                        <div className="weather-content">
+                          <img
+                            src={cloud}
+                            alt="cloud"
+                            className="weatherIcon"
+                          />
+                          <Weather />
+                        </div>
+                      ) : null}
                     </li>
                     <div ref={messagesEndRef} />
                   </span>
