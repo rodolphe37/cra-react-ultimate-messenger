@@ -30,10 +30,7 @@ const useChatBot = () => {
   let d = new Date();
   let n = d.toLocaleString();
 
-  useEffect(() => {
-    // console.log("user name :", userName);
-    // console.log("infos user :", infosUser);
-  }, [infosUser, userName]);
+  useEffect(() => {}, [infosUser, userName]);
 
   // Regex remove non word/space chars
   // Trim trailing whitespce
@@ -76,23 +73,23 @@ const useChatBot = () => {
   if (compare(prompts, replies, text)) {
     // Search for exact match in `prompts`
     product = compare(prompts, replies, text);
-  } else if (text.match(/chatbot|chatbotté/gi) && !userName) {
+  } else if (text.match(/chatbot/gi) && !userName) {
     product = `Que puis-je faire pour toi?`;
-  } else if (text.match(/room|quelle room/gi) && roomToken) {
+  } else if (text.match(/room/gi) && roomToken) {
     product = `Tu es dans la room - ${roomToken} 😉`;
-  } else if (text.match(/room|quelle room/gi) && !roomToken) {
+  } else if (text.match(/room/gi) && !roomToken) {
     product = `Je crain que tu ne soit plus connecté à une room 😕. Reconnecte toi en ré-ouvrant le chat 😝`;
-  } else if (text.match(/chatbot|chatbotté/gi) && userName) {
+  } else if (text.match(/chatbot/gi) && userName) {
     product = `Que puis-je faire pour toi ${userName}?`;
-  } else if (text.match(/merci|super|génial/gi)) {
-    product = "Pas de souci 😁";
-  } else if (text.match(/con|niqué|gueule/gi)) {
-    product = "Hooo, pas d'insultes 🤬 jeune branleur!!!😡";
-  } else if (text.match(/horloge|quelle heure/gi)) {
+  } else if (text.match(/merci/gi)) {
+    product = "Pas de quoi";
+  } else if (text.match(/merci/gi)) {
+    product = "Pas de quoi";
+  } else if (text.match(/horloge/gi)) {
     product = `il est exactement ${time}`;
-  } else if (text.match(/calendrier|quel jour/gi)) {
+  } else if (text.match(/calendrier/gi)) {
     product = `Nous somme le ${n}`;
-  } else if (text.match(/qui je suis|qui suis-je|j'suis qui/gi)) {
+  } else if (text.match(/suis/gi)) {
     infosUser &&
       (product = `Tu t'appelle : ${userName}, ton drapeau est ${infosUser.flag},
     ton ip est : ${infosUser.ip},
