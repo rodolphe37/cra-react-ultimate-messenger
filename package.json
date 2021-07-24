@@ -7,7 +7,7 @@
     "node": ">=10"
   },
   "main": "template.json",
-  "description": "A quick start Create React App with full chat application and more",
+  "description": "A quick start Create React App with full chat application",
   "keywords": [
     "react",
     "create-react-app",
