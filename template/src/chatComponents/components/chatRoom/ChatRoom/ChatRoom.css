@@ -313,6 +313,8 @@ button {
   margin-bottom: 0px;
   height: 2px;
   background: transparent !important;
+  position: absolute;
+  bottom: 47px;
 }
 
 .dot-typing {
