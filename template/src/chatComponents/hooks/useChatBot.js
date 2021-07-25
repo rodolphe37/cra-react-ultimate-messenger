@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import Weather from "../components/weatherComponent/WeatherComponent";
 import {
   prompts,
   replies,
