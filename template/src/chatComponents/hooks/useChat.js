@@ -165,7 +165,7 @@ const useChat = () => {
         setTimeout(() => {
           localStorage.setItem("sound", true);
           setIsNotifications(true);
-        }, 5000);
+        }, 5500);
       }
     }
     if (isTaping) {

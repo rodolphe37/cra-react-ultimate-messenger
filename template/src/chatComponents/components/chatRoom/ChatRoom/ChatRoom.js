@@ -72,7 +72,7 @@ const ChatRoom = (props) => {
     if (isLoaded) {
       setTimeout(() => {
         setIsLoaded(false);
-      }, 2500);
+      }, 3500);
     }
     return () => {
       setRoomToken("");
