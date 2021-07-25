@@ -38,12 +38,16 @@ import roomIdAtom from "../../../stateManager/atoms/roomIdAtom";
 import Weather from "../../weatherComponent/WeatherComponent";
 import cloud from "../../../assets/cloudy.svg";
 import Loader from "../../loader/Loader";
+import isSoundNotificationsAtom from "../../../stateManager/atoms/isSoundNotifications";
 
 const ChatRoom = (props) => {
   let history = useHistory();
   const messagesEndRef = useRef(null);
   const [roomToken, setRoomToken] = useRecoilState(roomIdAtom);
   const [isLoaded, setIsLoaded] = useState(true);
+  const [isSoundNotification, setIsSoundNotification] = useRecoilState(
+    isSoundNotificationsAtom
+  );
   // const { roomId } = props.match.params; // Gets roomId from URL
 
   // USE UUIDV4 FOR GENERATE ID ROOM FOR CHAT
@@ -59,6 +63,10 @@ const ChatRoom = (props) => {
   // }, []);
 
   useEffect(() => {
+    setIsSoundNotification(false);
+    setTimeout(() => {
+      setIsSoundNotification(true);
+    }, 4200);
     if (!roomToken && sessionStorage.getItem("roomName") !== null) {
       setRoomToken(sessionStorage.getItem("roomName"));
     }
@@ -70,9 +78,13 @@ const ChatRoom = (props) => {
       setRoomToken(roomId.roomToken);
     }
     if (isLoaded) {
+      setIsSoundNotification(false);
       setTimeout(() => {
         setIsLoaded(false);
       }, 3500);
+      setTimeout(() => {
+        setIsSoundNotification(true);
+      }, 4600);
     }
     return () => {
       setRoomToken("");

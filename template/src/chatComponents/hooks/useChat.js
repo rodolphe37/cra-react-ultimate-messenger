@@ -159,14 +159,6 @@ const useChat = () => {
   useEffect(() => {
     if (localStorage.getItem("messages") !== null) {
       setMessages(JSON.parse(localStorage.getItem("messages")));
-      if (messages === [] && isNotifications) {
-        localStorage.setItem("sound", false);
-        setIsNotifications(false);
-        setTimeout(() => {
-          localStorage.setItem("sound", true);
-          setIsNotifications(true);
-        }, 5500);
-      }
     }
     if (isTaping) {
       startTypingMessage();
