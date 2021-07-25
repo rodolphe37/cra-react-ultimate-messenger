@@ -19,9 +19,13 @@ import ok from "../../assets/ok.svg";
 import supp from "../../assets/supp.svg";
 import validateUsernameAtom from "../../stateManager/atoms/validateUsernameAtom";
 import { useTranslation } from "react-i18next";
+import isSoundNotificationsAtom from "../../stateManager/atoms/isSoundNotifications";
 
 const Parameters = () => {
   const [username, setUsername] = useRecoilState(usernameAtom);
+  const [isSoundNotification, setIsSoundNotification] = useRecoilState(
+    isSoundNotificationsAtom
+  );
   const [eraseUsername, setEraseUsername] = useState(true);
   const { t } = useTranslation();
   const [validateUsername, setValidateUsername] =
@@ -29,12 +33,10 @@ const Parameters = () => {
   const {
     selectedDarkTheme,
     selectedLightTheme,
-    isSoundNotification,
     clickedSound1,
     setClickedSound1,
     clickedSound2,
     setClickedSound2,
-    setIsSoundNotification,
     clickedParams,
     openDangerZone,
     setOpenDangerZone,
