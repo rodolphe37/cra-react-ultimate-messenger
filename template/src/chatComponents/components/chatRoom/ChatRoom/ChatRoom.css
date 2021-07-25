@@ -952,3 +952,22 @@ button {
   padding-right: 25px;
   color: darkgray;
 }
+.roomId-test {
+  margin-bottom: 1em;
+}
+
+.roomId-test > input {
+  padding: 7px 2px;
+  border-radius: 7px;
+  font-size: 18px;
+  border: none;
+  box-shadow: 0 0 4px grey;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  text-indent: 15px;
+}
+
+.roomId-test > input:focus,
+.roomId-test > button:focus {
+  outline: none;
+}

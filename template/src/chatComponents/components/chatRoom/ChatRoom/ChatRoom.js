@@ -39,6 +39,7 @@ import Weather from "../../weatherComponent/WeatherComponent";
 import cloud from "../../../assets/cloudy.svg";
 import Loader from "../../loader/Loader";
 import isSoundNotificationsAtom from "../../../stateManager/atoms/isSoundNotifications";
+import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 
 const ChatRoom = (props) => {
   let history = useHistory();
@@ -403,6 +404,65 @@ const ChatRoom = (props) => {
     // console.log("coronavirus :", coronavirus);
     // console.log("alternatives :", alternative);
   }, [newMessage, messageForBot]);
+
+  // WEB PUSH SECTION
+  const youAreCalled = messages.map((res) => res.body);
+  const yourUserName = username;
+  useEffect(() => {
+    // FOR BROWSERS & ANDROID PHONE ONLY
+    if (isBrowser || isAndroid) {
+      // THIS FIRST WEBPUSH IS WELCOME MESSAGE
+      Notification.requestPermission((result) => {
+        if (result === "granted") {
+          showNotification("Bienvenue sur l'application Ultimate Chat!");
+        }
+      });
+
+      function showNotification(title, message) {
+        if ("Notification" in window) {
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.showNotification(title, {
+              body: message,
+              tag: "vibration-sample",
+            });
+          });
+        }
+      }
+      // THIS WEBPUSH IS WHEN THE OTHER USER CALL YOU IN MESSAGE CHAT
+      if (clickedOffChat === true) {
+        if (isBrowser || isAndroid) {
+          // THIS WEBPUSH IS WHEN THE OTHER USER CALL YOU IN MESSAGE CHAT
+          if (messages.length > 0) {
+            if (youAreCalled.includes(`${yourUserName}`)) {
+              console.log("on parle de toi!!!");
+              Notification.requestPermission((result) => {
+                if (result === "granted") {
+                  showNotification(
+                    "Une personne a écrit votre nom d'utilisateur dans le chat !"
+                  );
+                }
+              });
+
+              function showNotification(title, message) {
+                if ("Notification" in window) {
+                  navigator.serviceWorker.ready.then((registration) => {
+                    registration.showNotification(title, {
+                      body: message,
+                      tag: "vibration-sample",
+                    });
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    if (isIOS) {
+      // alert("This is an Iphone")
+    }
+  }, [messages, username]);
+  // END OF WEBPUSH SECTION
 
   return (
     <Fragment>
