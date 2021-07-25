@@ -380,32 +380,29 @@ const ChatRoom = (props) => {
 
   // WEB PUSH SECTION
   useEffect(() => {
-    useEffect(() => {
-      // THIS WEBPUSH APPEAR LIKE WELCOME MESSAGE
-      if (clickedOffChat === true) {
-        if (isBrowser || isAndroid) {
-          // THIS FIRST WEBPUSH IS WELCOME MESSAGE
-          Notification.requestPermission((result) => {
-            if (result === "granted") {
-              showNotification(
-                "Bienvenue sur l'application React Ultimate Chat!"
-              );
-            }
-          });
+    // THIS WEBPUSH APPEAR LIKE WELCOME MESSAGE
+    if (isBrowser || isAndroid) {
+      // THIS FIRST WEBPUSH IS WELCOME MESSAGE
+      Notification.requestPermission((result) => {
+        if (result === "granted") {
+          showNotification("Bienvenue sur l'application React Ultimate Chat!");
+        }
+      });
 
-          function showNotification(title, message) {
-            if ("Notification" in window) {
-              navigator.serviceWorker.ready.then((registration) => {
-                registration.showNotification(title, {
-                  body: message,
-                  tag: "vibration-sample",
-                });
-              });
-            }
-          }
+      function showNotification(title, message) {
+        if ("Notification" in window) {
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.showNotification(title, {
+              body: message,
+              tag: "vibration-sample",
+            });
+          });
         }
       }
-    }, []);
+    }
+  }, []);
+
+  useEffect(() => {
     // CHECK THE MESSAGE CONTENT
     const youAreCalled = messages.map((res) => res.body);
     // CHECK THE USERNAME FROM USERNAMEATOM STATE
