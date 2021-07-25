@@ -63,10 +63,10 @@ const ChatRoom = (props) => {
   // }, []);
 
   useEffect(() => {
-    setIsSoundNotification(false);
-    setTimeout(() => {
-      setIsSoundNotification(true);
-    }, 4200);
+    // setIsSoundNotification(false);
+    // setTimeout(() => {
+    //   setIsSoundNotification(true);
+    // }, 4200);
     if (!roomToken && sessionStorage.getItem("roomName") !== null) {
       setRoomToken(sessionStorage.getItem("roomName"));
     }
