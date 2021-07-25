@@ -7,6 +7,10 @@ import {
   replies,
   coronavirus,
   alternative,
+  rock,
+  stories,
+  love,
+  win,
 } from "../constants/constants";
 import messageForBotAtom from "../stateManager/atoms/messageForBotAtom";
 import roomIdAtom from "../stateManager/atoms/roomIdAtom";
@@ -83,7 +87,7 @@ const useChatBot = () => {
     product = `Que puis-je faire pour toi ${userName}?`;
   } else if (text.match(/merci|super|génial/gi)) {
     product = "Pas de souci 😁";
-  } else if (text.match(/con|niqué|gueule/gi)) {
+  } else if (text.match(/connard|niqué|gueule/gi)) {
     product = "Hooo, pas d'insultes 🤬 jeune branleur!!!😡";
   } else if (text.match(/horloge|quelle heure/gi)) {
     product = `il est exactement ${time}`;
@@ -101,6 +105,22 @@ const useChatBot = () => {
   } else if (text.match(/(corona|covid|virus)/gi)) {
     // If no match, check if message contains `coronavirus`
     product = coronavirus[Math.floor(Math.random() * coronavirus.length)];
+  } else if (text.match(/(on joue|jouons ensemble|pierre|papier|ciseaux)/gi)) {
+    // If no match, check if message contains `rock paper scissors`
+    product = rock[Math.floor(Math.random() * rock.length)];
+  } else if (text.match(/(aime|kiff|love|génial)/gi)) {
+    // If no match, check if message contains `love conversation`
+    product = love[Math.floor(Math.random() * love.length)];
+  } else if (
+    text.match(
+      /(raconte moi une blague|blague|fais moi rire|encore une autre|une autre)/gi
+    )
+  ) {
+    // If no match, check if message contains `joke`
+    product = stories[Math.floor(Math.random() * stories.length)];
+  } else if (text.match(/(j'ai gagné|yeah|qui le vainquer|super|)/gi)) {
+    // If no match, check if message contains `love conversation`
+    product = win[Math.floor(Math.random() * win.length)];
   } else {
     // If all else fails: random alternative
     product = alternative[Math.floor(Math.random() * alternative.length)];
