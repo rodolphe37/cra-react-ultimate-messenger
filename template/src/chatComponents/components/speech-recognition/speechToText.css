@@ -51,6 +51,7 @@
   width: 138px;
   margin-right: 4px;
   transition: all 0.4s ease-in-out;
+  overflow: hidden;
 }
 .margin-right10 {
   margin-right: 10px;
