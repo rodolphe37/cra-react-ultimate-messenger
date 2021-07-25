@@ -40,6 +40,7 @@ import cloud from "../../../assets/cloudy.svg";
 import Loader from "../../loader/Loader";
 import isSoundNotificationsAtom from "../../../stateManager/atoms/isSoundNotifications";
 import { isAndroid, isIOS, isBrowser } from "react-device-detect";
+import usernameAtom from "../../../stateManager/atoms/usernameAtom";
 
 const ChatRoom = (props) => {
   let history = useHistory();
@@ -94,6 +95,7 @@ const ChatRoom = (props) => {
   }, []);
 
   let roomId = { roomToken };
+  const [username, setUsername] = useRecoilState(usernameAtom);
 
   const {
     messages,
@@ -397,12 +399,6 @@ const ChatRoom = (props) => {
     if (newMessage.includes("#")) {
       setMessageForBot(newMessage);
     }
-    // console.log("message for bot :", messageForBot);
-    // console.log("prompts :", prompts);
-    // console.log("product :", product);
-    // console.log("replies :", replies);
-    // console.log("coronavirus :", coronavirus);
-    // console.log("alternatives :", alternative);
   }, [newMessage, messageForBot]);
 
   // WEB PUSH SECTION
