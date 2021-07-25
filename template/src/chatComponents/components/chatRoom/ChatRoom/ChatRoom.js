@@ -379,52 +379,61 @@ const ChatRoom = (props) => {
   }, [newMessage, messageForBot]);
 
   // WEB PUSH SECTION
-  const youAreCalled = messages.map((res) => res.body);
-  const yourUserName = username;
   useEffect(() => {
-    // FOR BROWSERS & ANDROID PHONE ONLY
-    if (isBrowser || isAndroid) {
-      // THIS FIRST WEBPUSH IS WELCOME MESSAGE
-      Notification.requestPermission((result) => {
-        if (result === "granted") {
-          showNotification("Bienvenue sur l'application Ultimate Chat!");
-        }
-      });
-
-      function showNotification(title, message) {
-        if ("Notification" in window) {
-          navigator.serviceWorker.ready.then((registration) => {
-            registration.showNotification(title, {
-              body: message,
-              tag: "vibration-sample",
-            });
-          });
-        }
-      }
-      // THIS WEBPUSH IS WHEN THE OTHER USER CALL YOU IN MESSAGE CHAT
+    useEffect(() => {
+      // THIS WEBPUSH APPEAR LIKE WELCOME MESSAGE
       if (clickedOffChat === true) {
         if (isBrowser || isAndroid) {
-          // THIS WEBPUSH IS WHEN THE OTHER USER CALL YOU IN MESSAGE CHAT
-          if (messages.length > 0) {
-            if (youAreCalled.includes(`${yourUserName}`)) {
-              console.log("on parle de toi!!!");
-              Notification.requestPermission((result) => {
-                if (result === "granted") {
-                  showNotification(
-                    "Une personne a écrit votre nom d'utilisateur dans le chat !"
-                  );
-                }
-              });
+          // THIS FIRST WEBPUSH IS WELCOME MESSAGE
+          Notification.requestPermission((result) => {
+            if (result === "granted") {
+              showNotification(
+                "Bienvenue sur l'application React Ultimate Chat!"
+              );
+            }
+          });
 
-              function showNotification(title, message) {
-                if ("Notification" in window) {
-                  navigator.serviceWorker.ready.then((registration) => {
-                    registration.showNotification(title, {
-                      body: message,
-                      tag: "vibration-sample",
-                    });
+          function showNotification(title, message) {
+            if ("Notification" in window) {
+              navigator.serviceWorker.ready.then((registration) => {
+                registration.showNotification(title, {
+                  body: message,
+                  tag: "vibration-sample",
+                });
+              });
+            }
+          }
+        }
+      }
+    }, []);
+    // CHECK THE MESSAGE CONTENT
+    const youAreCalled = messages.map((res) => res.body);
+    // CHECK THE USERNAME FROM USERNAMEATOM STATE
+    const yourUserName = username;
+    // ONLY IF THE CHAT WINDOW IS REDUCED
+    if (clickedOffChat === true) {
+      // FOR BROWSERS & ANDROID PHONE ONLY
+      if (isBrowser || isAndroid) {
+        // THIS WEBPUSH IS WHEN THE OTHER USER CALL YOU IN MESSAGE CHAT
+        if (messages.length > 0) {
+          if (youAreCalled.includes(`${yourUserName}`)) {
+            console.log("on parle de toi!!!");
+            Notification.requestPermission((result) => {
+              if (result === "granted") {
+                showNotification(
+                  "Une personne a écrit votre nom d'utilisateur dans le chat !"
+                );
+              }
+            });
+
+            function showNotification(title, message) {
+              if ("Notification" in window) {
+                navigator.serviceWorker.ready.then((registration) => {
+                  registration.showNotification(title, {
+                    body: message,
+                    tag: "vibration-sample",
                   });
-                }
+                });
               }
             }
           }
@@ -434,7 +443,7 @@ const ChatRoom = (props) => {
     if (isIOS) {
       // alert("This is an Iphone")
     }
-  }, [messages, username]);
+  }, [username, messages]);
   // END OF WEBPUSH SECTION
 
   return (
