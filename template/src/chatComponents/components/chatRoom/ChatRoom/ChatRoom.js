@@ -32,8 +32,8 @@ import { useTranslation } from "react-i18next";
 import callEndedAtom from "../../../stateManager/atoms/callEndedAtom";
 import EmptyChatMessage from "./EmptyChatMessage";
 import messageForBotAtom from "../../../stateManager/atoms/messageForBotAtom";
-import useChatBot from "../../../hooks/useChatBot";
-import { v4 as uuidv4 } from "uuid";
+
+// import { v4 as uuidv4 } from "uuid";
 import roomIdAtom from "../../../stateManager/atoms/roomIdAtom";
 import Weather from "../../weatherComponent/WeatherComponent";
 import cloud from "../../../assets/cloudy.svg";
@@ -65,10 +65,6 @@ const ChatRoom = (props) => {
   // }, []);
 
   useEffect(() => {
-    // setIsSoundNotification(false);
-    // setTimeout(() => {
-    //   setIsSoundNotification(true);
-    // }, 4200);
     if (!roomToken && sessionStorage.getItem("roomName") !== null) {
       setRoomToken(sessionStorage.getItem("roomName"));
     }
@@ -145,7 +141,6 @@ const ChatRoom = (props) => {
   const { resetTranscript } = useSpeechRecognition();
   const { t } = useTranslation();
   const [messageForBot, setMessageForBot] = useRecoilState(messageForBotAtom);
-  const { product, prompts, replies, coronavirus, alternative } = useChatBot();
 
   // TODO STATE ATOM & LOGIQUE POUR SUPPRIMER LE DERNIER MESSAGE(MESSAGE CONTENANT L'ID DE L'APPEL) QUAND LA CALL EST END --
   // VIDER L'IDCHATINVITATION QUAND LE CALL EST END PUIS SUPPRIMER LES DERNIER MESSAGE (POP || PUSH METHODE A VOIR) (SI CONTIENT INVITATION VIDÉO) EN MÊME TEMPS.
@@ -168,13 +163,6 @@ const ChatRoom = (props) => {
         window.location.replace(`/video/${roomToken}`);
       }, 1200);
     }
-
-    // if (callEnded) {
-    //   messages.pop();
-    //   console.log("messages :", messages);
-    //   // localStorage.setItem("messages", messages);
-    // }
-    // console.log("roomId :", roomId);
   }, [messages, userAllInfos]);
 
   const handleNewMessageChange = (event) => {
@@ -216,9 +204,6 @@ const ChatRoom = (props) => {
       setClickedChevron(true);
       setIsReceiveMediaToUser(false);
       resetTranscript();
-      // if (newMessage.includes("#")) {
-      //   setMessageForBot(newMessage);
-      // }
     }
     if (pictComment !== "") {
       setplusSection(false);
@@ -323,14 +308,6 @@ const ChatRoom = (props) => {
       res.body.includes("Invitation vidéo, copiez l'id afin de vous connecter:")
     );
 
-    // if (clickedCopyId) {
-    //   console.log("it's video chat invitation");
-
-    //   console.log("some messages pop :", messages.pop());
-    //   console.log("some messages :", messages);
-    // }
-
-    // setMessages(messages);
     if (someMess.includes(true)) {
       // console.log("id for chat:", idChatInvitation);
       messages.map((message, i) =>
@@ -747,10 +724,6 @@ const ChatRoom = (props) => {
                             <Weather />
                           </div>
                         ) : null}
-                        {/*!message.ownedByCurrentUser &&
-                        message.body.includes("météo") &&
-                        !message.body.includes("&") &&
-                      null*/}
                       </li>
                       <div ref={messagesEndRef} />
                     </span>
