@@ -8,7 +8,6 @@ import usernameAtom from "../stateManager/atoms/usernameAtom";
 import botPict from "../assets/bot-mini.png";
 import useChatBot from "./useChatBot";
 import roomIdAtom from "../stateManager/atoms/roomIdAtom";
-import isSoundNotificationsAtom from "../stateManager/atoms/isSoundNotifications";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"; // Name of the event
 const SOCKET_SERVER_URL = `${process.env.REACT_APP_SOCKET_WEBSERVICE}`;
@@ -17,9 +16,7 @@ const STOP_TYPING_MESSAGE_EVENT = "STOP_TYPING_MESSAGE_EVENT";
 
 const useChat = () => {
   const { product } = useChatBot();
-  const [isNotifications, setIsNotifications] = useRecoilState(
-    isSoundNotificationsAtom
-  );
+
   const [username] = useRecoilState(usernameAtom);
   const [messages, setMessages] = useState([]); // Sent and received messages
   const socketRef = useRef();
