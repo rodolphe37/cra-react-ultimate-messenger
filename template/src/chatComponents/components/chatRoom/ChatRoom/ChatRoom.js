@@ -37,11 +37,13 @@ import { v4 as uuidv4 } from "uuid";
 import roomIdAtom from "../../../stateManager/atoms/roomIdAtom";
 import Weather from "../../weatherComponent/WeatherComponent";
 import cloud from "../../../assets/cloudy.svg";
+import Loader from "../../loader/Loader";
 
 const ChatRoom = (props) => {
   let history = useHistory();
   const messagesEndRef = useRef(null);
   const [roomToken, setRoomToken] = useRecoilState(roomIdAtom);
+  const [isLoaded, setIsLoaded] = useState(true);
   // const { roomId } = props.match.params; // Gets roomId from URL
 
   // USE UUIDV4 FOR GENERATE ID ROOM FOR CHAT
@@ -66,6 +68,11 @@ const ChatRoom = (props) => {
     if (!roomToken && !sessionStorage.getItem("roomName")) {
       const roomId = props.match.params; // Gets roomId from URL
       setRoomToken(roomId.roomToken);
+    }
+    if (isLoaded) {
+      setTimeout(() => {
+        setIsLoaded(false);
+      }, 2500);
     }
     return () => {
       setRoomToken("");
@@ -442,228 +449,247 @@ const ChatRoom = (props) => {
           </div>
         </span>
         {openVideoChat && window.location.replace(`/video/${roomToken}`)}
-        <div
-          onClick={() => setClickedParams(false)}
-          className={`${clickedOffChat ? "messages-container-closed" : ""}
+        {isLoaded ? (
+          <div
+            className={`${
+              !selectedDarkTheme
+                ? "messages-container messages-container-spiner light-background"
+                : "messages-container messages-container-spiner dark-background"
+            }`}
+          >
+            <Loader />
+          </div>
+        ) : (
+          <div
+            onClick={() => setClickedParams(false)}
+            className={`${clickedOffChat ? "messages-container-closed" : ""}
             ${
               !selectedDarkTheme
                 ? "messages-container light-background"
                 : "messages-container dark-background"
             }
           `}
-        >
-          {messages.length === 0 ? (
-            <EmptyChatMessage messages={messages} />
-          ) : null}
-          <ol className="messages-list">
-            {messages.map((message, i) => {
-              return (
-                <span key={i} className="messages-section">
-                  <span>
-                    {clickedSound1 && !message.ownedByCurrentUser && (
-                      <audio autoPlay>
-                        <source src={sound} />
-                      </audio>
-                    )}
-                    {clickedSound2 && !message.ownedByCurrentUser && (
-                      <audio autoPlay>
-                        <source src={sound2} />
-                      </audio>
-                    )}
-                    <ul className="message-date">{message.timeStamp}</ul>
-                    <p
-                      onClick={handleClickOnName}
-                      style={{ fontSize: 11, marginBottom: -20, marginTop: 5 }}
-                      className={`message-item ${
-                        message.ownedByCurrentUser
-                          ? "my-message-name"
-                          : "received-message-name"
-                      }`}
-                    >
-                      {" "}
-                      {!clickedOnName && message.username && message.ip
-                        ? userAllInfos &&
-                          userAllInfos.flag + " - " + message.username
-                        : clickedOnName && message.username
-                        ? userAllInfos &&
-                          message.ip &&
-                          userAllInfos.flag + "- Adresse ip :" + message.ip
-                        : null}
-                      {!clickedOnName && !message.username
-                        ? userAllInfos &&
-                          message.ip &&
-                          userAllInfos.flag + "- Adresse ip :" + message.ip
-                        : clickedOnName && !message.username
-                        ? userAllInfos &&
-                          message.ip &&
-                          userAllInfos.flag + "- Adresse ip :" + message.ip
-                        : null}
-                      {!message.ip && "ChatBot"}
-                    </p>
-                    <li
-                      style={{ position: "relative" }}
-                      className={`message-item ${
-                        isNotAlphaNumeric(message.body) ? "height45" : ""
-                      } ${
-                        message.ownedByCurrentUser
-                          ? "my-message"
-                          : "received-message"
-                      }`}
-                    >
-                      {message.picture && (
-                        <span className="messagesContent">
-                          <img
-                            className="chatbot-img"
-                            src={message.picture}
-                            alt="botPicture"
-                          />
-                          {isNotAlphaNumeric(message.body) ? (
-                            <p
-                              style={{
-                                fontSize: 23,
-                                marginTop: 0,
-                                marginBottom: 0,
-                              }}
-                            >
-                              {message.body}
-                            </p>
-                          ) : (
-                            <p
-                              style={{ marginTop: 0, marginBottom: 0 }}
-                              className="chatbot-text"
-                            >
-                              {message.body}
-                            </p>
-                          )}
-                        </span>
+          >
+            {messages.length === 0 ? (
+              <EmptyChatMessage messages={messages} />
+            ) : null}
+            <ol className="messages-list">
+              {messages.map((message, i) => {
+                return (
+                  <span key={i} className="messages-section">
+                    <span>
+                      {clickedSound1 && !message.ownedByCurrentUser && (
+                        <audio autoPlay>
+                          <source src={sound} />
+                        </audio>
                       )}
-                      {message.body?.includes("jpg", 0) ||
-                      message.body?.includes("JPG", 0) ||
-                      message.body?.includes("jpeg", 0) ||
-                      message.body?.includes("JPEG", 0) ||
-                      message.body?.includes("png", 0) ||
-                      message.body?.includes("PNG", 0) ? (
-                        <Fragment>
-                          {seingMedia ? (
-                            <span className="display-picture">
-                              <img
+                      {clickedSound2 && !message.ownedByCurrentUser && (
+                        <audio autoPlay>
+                          <source src={sound2} />
+                        </audio>
+                      )}
+                      <ul className="message-date">{message.timeStamp}</ul>
+                      <p
+                        onClick={handleClickOnName}
+                        style={{
+                          fontSize: 11,
+                          marginBottom: -20,
+                          marginTop: 5,
+                        }}
+                        className={`message-item ${
+                          message.ownedByCurrentUser
+                            ? "my-message-name"
+                            : "received-message-name"
+                        }`}
+                      >
+                        {" "}
+                        {!clickedOnName && message.username && message.ip
+                          ? userAllInfos &&
+                            userAllInfos.flag + " - " + message.username
+                          : clickedOnName && message.username
+                          ? userAllInfos &&
+                            message.ip &&
+                            userAllInfos.flag + "- Adresse ip :" + message.ip
+                          : null}
+                        {!clickedOnName && !message.username
+                          ? userAllInfos &&
+                            message.ip &&
+                            userAllInfos.flag + "- Adresse ip :" + message.ip
+                          : clickedOnName && !message.username
+                          ? userAllInfos &&
+                            message.ip &&
+                            userAllInfos.flag + "- Adresse ip :" + message.ip
+                          : null}
+                        {!message.ip && "ChatBot"}
+                      </p>
+                      <li
+                        style={{ position: "relative" }}
+                        className={`message-item ${
+                          isNotAlphaNumeric(message.body) ? "height45" : ""
+                        } ${
+                          message.ownedByCurrentUser
+                            ? "my-message"
+                            : "received-message"
+                        }`}
+                      >
+                        {message.picture && (
+                          <span className="messagesContent">
+                            <img
+                              className="chatbot-img"
+                              src={message.picture}
+                              alt="botPicture"
+                            />
+                            {isNotAlphaNumeric(message.body) ? (
+                              <p
                                 style={{
-                                  borderRadius: 11,
-                                  maxWidth: 186,
-                                  maxHeight: 200,
-                                }}
-                                src={`${process.env.REACT_APP_UPLOAD_WEBSERVICE}/files/${message.body}`}
-                                alt=""
-                              />
-                              {message.comment && (
-                                <Fragment>
-                                  <p style={{ textAlign: "center" }}>
-                                    {message.comment}
-                                  </p>
-                                </Fragment>
-                              )}
-                              <div ref={messagesEndRef} />
-                            </span>
-                          ) : (
-                            <span
-                              className="button-display-picture"
-                              style={{ textAlign: "center" }}
-                            >
-                              {message.ownedByCurrentUser ? (
-                                <h2 className="seingMedia-title">
-                                  {t("sendPicture")}
-                                </h2>
-                              ) : (
-                                <h2 className="seingMedia-title">
-                                  {t("receivePicture")}
-                                </h2>
-                              )}
-
-                              <sub
-                                style={{
-                                  fontWeight: "bold",
-                                  fontSize: 10,
-                                  color: "rgb(40 38 38)",
+                                  fontSize: 23,
+                                  marginTop: 0,
+                                  marginBottom: 0,
                                 }}
                               >
-                                {t("desactivatePicture")}
-                              </sub>
-                              <p className="seingMedia-text">
-                                {t("functionSettingPicture")}
+                                {message.body}
                               </p>
-                              <div ref={messagesEndRef} />
-                            </span>
-                          )}
-                        </Fragment>
-                      ) : !message.picture &&
-                        isNotAlphaNumeric(message.body) ? (
-                        <p
-                          style={{
-                            fontSize: 23,
-                            marginTop: 0,
-                            marginBottom: 0,
-                          }}
-                        >
-                          {message.body}
-                        </p>
-                      ) : (
-                        !message.picture && message.body
-                      )}
-                      {message.body.includes("Invitation vidéo") ||
-                      message.body.includes("Video invitation")
-                        ? !message.ownedByCurrentUser &&
-                          (!clickedCopyId ? (
-                            <CopyToClipboard text={idChatInvitation}>
-                              <button
-                                disabled={clickedCopyId ? true : false}
-                                className={
-                                  clickedCopyId
-                                    ? "idForCallInvitation-clicked"
-                                    : "idForCallInvitation"
-                                }
-                                onClick={() => {
-                                  setClickedCopyId(true);
-                                  alert(
-                                    `Vous avez copié l'Id ${idChatInvitation}.`
-                                  );
-                                }}
+                            ) : (
+                              <p
+                                style={{ marginTop: 0, marginBottom: 0 }}
+                                className="chatbot-text"
                               >
-                                Copiez
-                              </button>
-                            </CopyToClipboard>
-                          ) : (
-                            <Fragment>
-                              <p>Le chat vidéo est entrain de démarrer...</p>
-                            </Fragment>
-                          ))
-                        : null}
-                      {message.body.includes("&météo") ? (
-                        <div
-                          className={
-                            message.ownedByCurrentUser ? "weather-content" : ""
-                          }
-                        >
-                          <img
-                            src={cloud}
-                            alt="cloud"
-                            className="weatherIcon"
-                          />
-                          <Weather />
-                        </div>
-                      ) : null}
-                      {/*!message.ownedByCurrentUser &&
+                                {message.body}
+                              </p>
+                            )}
+                          </span>
+                        )}
+                        {message.body?.includes("jpg", 0) ||
+                        message.body?.includes("JPG", 0) ||
+                        message.body?.includes("jpeg", 0) ||
+                        message.body?.includes("JPEG", 0) ||
+                        message.body?.includes("png", 0) ||
+                        message.body?.includes("PNG", 0) ? (
+                          <Fragment>
+                            {seingMedia ? (
+                              <span className="display-picture">
+                                <img
+                                  style={{
+                                    borderRadius: 11,
+                                    maxWidth: 186,
+                                    maxHeight: 200,
+                                  }}
+                                  src={`${process.env.REACT_APP_UPLOAD_WEBSERVICE}/files/${message.body}`}
+                                  alt=""
+                                />
+                                {message.comment && (
+                                  <Fragment>
+                                    <p style={{ textAlign: "center" }}>
+                                      {message.comment}
+                                    </p>
+                                  </Fragment>
+                                )}
+                                <div ref={messagesEndRef} />
+                              </span>
+                            ) : (
+                              <span
+                                className="button-display-picture"
+                                style={{ textAlign: "center" }}
+                              >
+                                {message.ownedByCurrentUser ? (
+                                  <h2 className="seingMedia-title">
+                                    {t("sendPicture")}
+                                  </h2>
+                                ) : (
+                                  <h2 className="seingMedia-title">
+                                    {t("receivePicture")}
+                                  </h2>
+                                )}
+
+                                <sub
+                                  style={{
+                                    fontWeight: "bold",
+                                    fontSize: 10,
+                                    color: "rgb(40 38 38)",
+                                  }}
+                                >
+                                  {t("desactivatePicture")}
+                                </sub>
+                                <p className="seingMedia-text">
+                                  {t("functionSettingPicture")}
+                                </p>
+                                <div ref={messagesEndRef} />
+                              </span>
+                            )}
+                          </Fragment>
+                        ) : !message.picture &&
+                          isNotAlphaNumeric(message.body) ? (
+                          <p
+                            style={{
+                              fontSize: 23,
+                              marginTop: 0,
+                              marginBottom: 0,
+                            }}
+                          >
+                            {message.body}
+                          </p>
+                        ) : (
+                          !message.picture && message.body
+                        )}
+                        {message.body.includes("Invitation vidéo") ||
+                        message.body.includes("Video invitation")
+                          ? !message.ownedByCurrentUser &&
+                            (!clickedCopyId ? (
+                              <CopyToClipboard text={idChatInvitation}>
+                                <button
+                                  disabled={clickedCopyId ? true : false}
+                                  className={
+                                    clickedCopyId
+                                      ? "idForCallInvitation-clicked"
+                                      : "idForCallInvitation"
+                                  }
+                                  onClick={() => {
+                                    setClickedCopyId(true);
+                                    alert(
+                                      `Vous avez copié l'Id ${idChatInvitation}.`
+                                    );
+                                  }}
+                                >
+                                  Copiez
+                                </button>
+                              </CopyToClipboard>
+                            ) : (
+                              <Fragment>
+                                <p>Le chat vidéo est entrain de démarrer...</p>
+                              </Fragment>
+                            ))
+                          : null}
+                        {message.body.includes("&météo") ? (
+                          <div
+                            className={
+                              message.ownedByCurrentUser
+                                ? "weather-content"
+                                : ""
+                            }
+                          >
+                            <img
+                              src={cloud}
+                              alt="cloud"
+                              className="weatherIcon"
+                            />
+                            <Weather />
+                          </div>
+                        ) : null}
+                        {/*!message.ownedByCurrentUser &&
                         message.body.includes("météo") &&
                         !message.body.includes("&") &&
                       null*/}
-                    </li>
+                      </li>
+                      <div ref={messagesEndRef} />
+                    </span>
                     <div ref={messagesEndRef} />
                   </span>
-                  <div ref={messagesEndRef} />
-                </span>
-              );
-            })}
-          </ol>
-        </div>
+                );
+              })}
+            </ol>
+          </div>
+        )}
+
         {senderIdNotif !== "" && writingUsers.isTaping ? (
           <div className="animTyping" id="typing_on">
             <IsTyping />
@@ -709,6 +735,7 @@ const ChatRoom = (props) => {
             }
           >
             <input
+              disabled={isLoaded ? true : false}
               autoComplete="off"
               onSelect={handleTypingInput}
               id="chat-message-input"
