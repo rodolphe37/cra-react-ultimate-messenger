@@ -931,7 +931,7 @@ button {
   box-shadow: 0px 0px 4px grey;
 }
 .chatbot-text {
-  padding-left: 12px;
+  padding-left: 0px;
   padding-top: 5px;
   color: #fff;
 }
