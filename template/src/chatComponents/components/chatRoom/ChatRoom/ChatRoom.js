@@ -453,7 +453,6 @@ const ChatRoom = (props) => {
     console.log("new mess", newMessages);
     const reducedArr = newMessages.filter((_, key) => {
       setKeyId(key);
-      console.log("key === messageIdToDelete", key === messageIdToDelete);
 
       console.log("key", key);
 
@@ -465,21 +464,22 @@ const ChatRoom = (props) => {
 
     setMessages(reducedArr);
     console.log("reducedArr", reducedArr);
+    console.log("key === messageIdToDelete", keyId === messageIdToDelete);
   }
- useEffect(() => {
-   if (messageIdToDelete) {
-     onDelete();
-   }
-   if (onDelete && messageIdToDelete === 0) {
-     setMessages([]);
-     localStorage.setItem("messages", messages);
-   }
+  useEffect(() => {
+    if (messageIdToDelete) {
+      onDelete();
+    }
+    if (onDelete && messageIdToDelete === 0) {
+      setMessages([]);
+      localStorage.setItem("messages", messages);
+    }
 
-   console.log("id from messageIdToDelete :", messageIdToDelete);
-   console.log("id from keyId value:", keyId);
-   console.log("mess", messages);
-   // console.log("arr", arr);
- }, [messageIdToDelete, keyId]);
+    console.log("id from messageIdToDelete :", messageIdToDelete);
+    console.log("id from keyId value:", keyId);
+    console.log("mess", messages);
+    // console.log("arr", arr);
+  }, [messageIdToDelete, keyId]);
 
   const handletoggleDeleteButton = () => {
     if (toggleDeleteButton) {
