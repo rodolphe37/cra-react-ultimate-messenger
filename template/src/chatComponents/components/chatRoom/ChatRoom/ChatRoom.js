@@ -41,6 +41,8 @@ import Loader from "../../loader/Loader";
 import isSoundNotificationsAtom from "../../../stateManager/atoms/isSoundNotifications";
 import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 import usernameAtom from "../../../stateManager/atoms/usernameAtom";
+import DeleteBubble from "../../../assets/delete-bubble.svg";
+import DeleteBubbleRight from "../../../assets/delete-bubble-right.svg";
 
 const ChatRoom = (props) => {
   let history = useHistory();
@@ -146,6 +148,7 @@ const ChatRoom = (props) => {
   // VIDER L'IDCHATINVITATION QUAND LE CALL EST END PUIS SUPPRIMER LES DERNIER MESSAGE (POP || PUSH METHODE A VOIR) (SI CONTIENT INVITATION VIDÉO) EN MÊME TEMPS.
   const [clickedCopyId, setClickedCopyId] = useState(false);
   const [idChatInvitation, setIdChatInvitation] = useState("");
+  const [toggleDeleteButton, setToggleDeleteButton] = useState(false);
 
   let d = new Date();
   let n = d.toLocaleString();
@@ -442,6 +445,45 @@ const ChatRoom = (props) => {
     }
   }, [username, messages]);
   // END OF WEBPUSH SECTION
+  const [messageIdToDelete, setMessageIsToDelete] = useState("");
+  const [keyId, setKeyId] = useState("");
+
+  function onDelete(messageIdToDelete) {
+    const newMessages = messages.filter((i) => i);
+    console.log("new mess", newMessages);
+    const reducedArr = newMessages.filter((_, key) => {
+      setKeyId(key);
+      console.log("key === messageIdToDelete", key === messageIdToDelete);
+
+      console.log("key", key);
+
+      // if (key !== keyId) {
+      //   console.log("key!==", key !== Number(keyId));
+      // }
+      return key !== keyId;
+    });
+
+    setMessages(reducedArr);
+    console.log("reducedArr", reducedArr);
+  }
+  useEffect(() => {
+    if (messageIdToDelete) {
+      onDelete();
+    }
+    console.log("id from messageIdToDelete :", messageIdToDelete);
+    console.log("id from keyId value:", keyId);
+    console.log("mess", messages);
+    // console.log("arr", arr);
+  }, [messageIdToDelete, keyId]);
+
+  const handletoggleDeleteButton = () => {
+    if (toggleDeleteButton) {
+      setToggleDeleteButton(false);
+    }
+    if (!toggleDeleteButton) {
+      setToggleDeleteButton(true);
+    }
+  };
 
   return (
     <Fragment>
@@ -586,7 +628,39 @@ const ChatRoom = (props) => {
                             ? "my-message"
                             : "received-message"
                         }`}
+                        onClick={handletoggleDeleteButton}
                       >
+                        <button
+                          className={
+                            message.ownedByCurrentUser
+                              ? toggleDeleteButton
+                                ? "deleteIconBubble slide-in-right"
+                                : "deleteIconBubble hiddenParams"
+                              : toggleDeleteButton
+                              ? "deleteIconBubble leftBubble slide-in-left "
+                              : "deleteIconBubble hiddenparams"
+                          }
+                          onClick={() => {
+                            setMessageIsToDelete(i);
+                          }}
+                        >
+                          <img
+                            style={{
+                              width: 44,
+                            }}
+                            src={
+                              !message.ownedByCurrentUser
+                                ? DeleteBubble
+                                : DeleteBubbleRight
+                            }
+                            alt="del"
+                            className={
+                              toggleDeleteButton
+                                ? "delete-bubble"
+                                : "hiddenParams"
+                            }
+                          />
+                        </button>
                         {message.picture && (
                           <span className="messagesContent">
                             <img

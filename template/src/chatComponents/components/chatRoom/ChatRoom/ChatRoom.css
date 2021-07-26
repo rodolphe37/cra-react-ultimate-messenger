@@ -973,3 +973,40 @@ button {
 .roomId-test > button:focus {
   outline: none;
 }
+.deleteIconBubble {
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 202px;
+  margin-top: -53px;
+  margin-right: -12px;
+}
+.leftBubble {
+  left: 192px;
+}
+.slide-in-right {
+  animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.slide-in-left {
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
