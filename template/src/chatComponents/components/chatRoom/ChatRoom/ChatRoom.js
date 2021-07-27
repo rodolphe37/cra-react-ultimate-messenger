@@ -43,8 +43,8 @@ import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 import usernameAtom from "../../../stateManager/atoms/usernameAtom";
 import DeleteBubble from "../../../assets/delete-left-icon.svg";
 import DeleteBubbleRight from "../../../assets/delete-right-icon.svg";
-import DeleteBubbleDarkTheme from "../../../assets/delete-left-icon.svg";
-import DeleteBubbleRightDarkTheme from "../../../assets/delete-right-icon.svg";
+import DeleteBubbleDarkTheme from "../../../assets/delete-left-icon-dark.svg";
+import DeleteBubbleRightDarkTheme from "../../../assets/delete-right-icon-dark.svg";
 
 const ChatRoom = (props) => {
   let history = useHistory();
