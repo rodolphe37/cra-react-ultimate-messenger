@@ -1,10 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// MODULES IMPORTS
 import Peer from "simple-peer";
 import io from "socket.io-client";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
+// STATEMANAGMENT IMPORTS
 import usernameAtom from "../stateManager/atoms/usernameAtom";
-
 import callEndedAtom from "../stateManager/atoms/callEndedAtom";
 import messagesAtom from "../stateManager/atoms/messagesAtom";
 import roomIdAtom from "../stateManager/atoms/roomIdAtom";

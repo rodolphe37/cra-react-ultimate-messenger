@@ -1,20 +1,23 @@
+// MODULES IMPORTS
 import { useState, Fragment } from "react";
-import "./bottomDrawer.css";
-import Bavarder from "../../assets/chat.svg";
 import { useRecoilState } from "recoil";
+import { useHistory, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+// CSS IMPORTS
+import "./bottomDrawer.css";
+// STATEMANAGMENT IMPORTS
 import selectedDarkThemeAtom from "../../stateManager/atoms/selectedDarkThemeAtom";
 import usernameAtom from "../../stateManager/atoms/usernameAtom";
-import { useHistory } from "react-router-dom";
 import selectedLightThemeAtom from "../../stateManager/atoms/selectedLightThemeAtom";
 import validateUsernameAtom from "../../stateManager/atoms/validateUsernameAtom";
-import { useTranslation } from "react-i18next";
+import roomIdAtom from "../../stateManager/atoms/roomIdAtom";
+import clickedGuestAtom from "../../stateManager/atoms/clickedGuestAtom";
+// ASSETS IMPORTS
 import ok from "../../assets/ok.svg";
 import supp from "../../assets/supp.svg";
-import clickedGuestAtom from "../../stateManager/atoms/clickedGuestAtom";
+import Bavarder from "../../assets/chat.svg";
 import logIn from "../../assets/user.svg";
 import logInWhite from "../../assets/user-white.svg";
-import roomIdAtom from "../../stateManager/atoms/roomIdAtom";
-import { Link } from "react-router-dom";
 
 const BottomDrawer = () => {
   const { t } = useTranslation();

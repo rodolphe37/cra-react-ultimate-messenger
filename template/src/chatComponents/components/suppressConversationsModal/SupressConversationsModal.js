@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+// MODULES IMPORTS
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+// CSS IMPORTS
 import "./supressConversationModal.css";
+// ASSETS IMPORTS
 import Yes from "../../assets/oui.svg";
 import No from "../../assets/non.svg";
 import DeleteSound from "../../assets/sounds/mixkit-paper-quick-movement-2380.mp3";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
 
 const SupressConversationsModal = ({
   Delete,

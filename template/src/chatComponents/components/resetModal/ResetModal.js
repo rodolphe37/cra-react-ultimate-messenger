@@ -1,13 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+// MODULES IMPORTS
+import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { useTranslation } from "react-i18next";
+// CSS IMPORTS
 import "./ResetModal.css";
+// STATEMANAGMENT IMPORTS
+import selectedDarkThemeAtom from "../../stateManager/atoms/selectedDarkThemeAtom";
+// ASSETS IMPORTS
 import Yes from "../../assets/oui.svg";
 import No from "../../assets/non.svg";
 import ResetAll from "../../assets/reset.svg";
 import resetSound from "../../assets/sounds/mixkit-software-interface-remove-2576 .mp3";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import selectedDarkThemeAtom from "../../stateManager/atoms/selectedDarkThemeAtom";
-import { useTranslation } from "react-i18next";
 
 const ResetModal = () => {
   const [isResetSound, setIsResetSound] = useState(false);

@@ -1,5 +1,5 @@
-import pictBot from "../../../assets/bot.png";
 import { useTranslation } from "react-i18next";
+import pictBot from "../../../assets/bot.png";
 
 const EmptyChatMessage = ({ messages }) => {
   const { t } = useTranslation();

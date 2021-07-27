@@ -1,12 +1,15 @@
+// MODULES IMPORTS
 import { useEffect, useRef } from "react";
-import isListeningAtom from "../stateManager/atoms/isListeningAtom";
-import speechToTextAtom from "../stateManager/atoms/speechToTextAtom";
-import useChat from "./useChat";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { useRecoilState } from "recoil";
 // import { useTranslation } from "react-i18next";
+// HOOKS IMPORTS
+import useChat from "./useChat";
+// STATEMANAGMENT IMPORTS
+import isListeningAtom from "../stateManager/atoms/isListeningAtom";
+import speechToTextAtom from "../stateManager/atoms/speechToTextAtom";
 import roomIdAtom from "../stateManager/atoms/roomIdAtom";
 import isLanguageAtom from "../stateManager/atoms/isLanguageAtom";
 

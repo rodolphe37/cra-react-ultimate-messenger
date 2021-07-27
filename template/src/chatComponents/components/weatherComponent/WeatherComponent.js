@@ -1,8 +1,12 @@
+// MODULES IMPORTS
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
-import fetchWeather from "../../services/fetchWeather";
-import weatherAtom from "../../stateManager/atoms/weatherAtom";
+// CSS IMPORTS
 import "./Weather.css";
+// HOOKS & SERVICES IMPORTS
+import fetchWeather from "../../services/fetchWeather";
+// STATEMANAGMENT IMPORTS
+import weatherAtom from "../../stateManager/atoms/weatherAtom";
 
 const Weather = () => {
   const [query, setQuery] = useState("");

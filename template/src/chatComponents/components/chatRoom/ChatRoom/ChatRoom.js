@@ -1,50 +1,56 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
+// MODULES IMPORTS
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useSpeechRecognition } from "react-speech-recognition";
-import React, { Fragment, useEffect, useState, useRef } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 import Picker, { SKIN_TONE_MEDIUM_LIGHT } from "emoji-picker-react";
-import Bavarder from "../../../assets/chat.svg";
-import sound from "../../../assets/sounds/mixkit-guitar-notification-alert-2320.mp3";
-import sound2 from "../../../assets/sounds/mixkit-software-interface-back-2575.mp3";
-import Parameters from "../../parameters/Parameters";
-import "./ChatRoom.css";
-import useChat from "../../../hooks/useChat";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
+import { useTranslation } from "react-i18next";
+import { isAndroid, isIOS, isBrowser } from "react-device-detect";
+// CSS IMPORTS
+import "./ChatRoom.css";
+// HOOKS & SERVICES IMPORTS
+import useChat from "../../../hooks/useChat";
+import UploadService from "../../../services/FileUploadService";
+import useGetUserInfos from "../../../hooks/useGetUserInfos";
+// STATEMANAGMENT IMPORTS
+import imageInfoAtom from "../../../stateManager/atoms/imageInfoAtom";
+import seeMediaAtom from "../../../stateManager/atoms/seeMediaAtom";
+import clickedParamsAtom from "../../../stateManager/atoms/clickedParamsAtom";
 import selectedDarkThemeAtom from "../../../stateManager/atoms/selectedDarkThemeAtom";
 import clickedSoundGuitarAtom from "../../../stateManager/atoms/clickedSoundGuitarAtom";
 import clickedSoundSoftwareAtom from "../../../stateManager/atoms/clickedSoundSoftwareAtom";
 import fileFromPictureAtom from "../../../stateManager/atoms/fileFromPictureAtom";
 import isReceivedMediasMessageToUserAtom from "../../../stateManager/atoms/receiveMediasMessageToUserAtom";
-import UploadImage from "../../ImageUploadComponent";
-import UploadService from "../../../services/FileUploadService";
-import imageInfoAtom from "../../../stateManager/atoms/imageInfoAtom";
-import seeMediaAtom from "../../../stateManager/atoms/seeMediaAtom";
-import clickedParamsAtom from "../../../stateManager/atoms/clickedParamsAtom";
-import useGetUserInfos from "../../../hooks/useGetUserInfos";
-import VideoCall from "../../../assets/video-chat-icon.svg";
-import SpeechToText from "../../speech-recognition/SpeechToText";
 import speechToTextAtom from "../../../stateManager/atoms/speechToTextAtom";
-import plus from "../../../assets/plus.svg";
 import plusSectionAtom from "../../../stateManager/atoms/plusSectionAtom";
-import { useTranslation } from "react-i18next";
 import callEndedAtom from "../../../stateManager/atoms/callEndedAtom";
-import EmptyChatMessage from "./EmptyChatMessage";
 import messageForBotAtom from "../../../stateManager/atoms/messageForBotAtom";
-
-// import { v4 as uuidv4 } from "uuid";
 import roomIdAtom from "../../../stateManager/atoms/roomIdAtom";
-import Weather from "../../weatherComponent/WeatherComponent";
-import cloud from "../../../assets/cloudy.svg";
-import Loader from "../../loader/Loader";
 import isSoundNotificationsAtom from "../../../stateManager/atoms/isSoundNotifications";
-import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 import usernameAtom from "../../../stateManager/atoms/usernameAtom";
+// COMPONENTS IMPORTS
+import Parameters from "../../parameters/Parameters";
+import UploadImage from "../../ImageUploadComponent";
+import SpeechToText from "../../speech-recognition/SpeechToText";
+import EmptyChatMessage from "./EmptyChatMessage";
+import Loader from "../../loader/Loader";
+import Weather from "../../weatherComponent/WeatherComponent";
+// ASSETS IMPORTS
+import Bavarder from "../../../assets/chat.svg";
+import sound from "../../../assets/sounds/mixkit-guitar-notification-alert-2320.mp3";
+import sound2 from "../../../assets/sounds/mixkit-software-interface-back-2575.mp3";
+import VideoCall from "../../../assets/video-chat-icon.svg";
+import plus from "../../../assets/plus.svg";
+import cloud from "../../../assets/cloudy.svg";
 import DeleteBubble from "../../../assets/delete-left-icon.svg";
 import DeleteBubbleRight from "../../../assets/delete-right-icon.svg";
 import DeleteBubbleDarkTheme from "../../../assets/delete-left-icon-dark.svg";
 import DeleteBubbleRightDarkTheme from "../../../assets/delete-right-icon-dark.svg";
+
+// import { v4 as uuidv4 } from "uuid";
 
 const ChatRoom = (props) => {
   let history = useHistory();

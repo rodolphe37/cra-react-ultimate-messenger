@@ -1,17 +1,21 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
-import UploadService from "../services/FileUploadService";
-import camera from "../assets/Group 54437@2x.png";
+// MODULES IMPORTS
+import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import fileFromPictureAtom from "../stateManager/atoms/fileFromPictureAtom";
-import isReceivedMediasMessageToUserAtom from "../stateManager/atoms/receiveMediasMessageToUserAtom";
-import imageInfoAtom from "../stateManager/atoms/imageInfoAtom";
+// HOOKS & SERVICES IMPORTS
 import useChat from "../hooks/useChat";
-import upArrow from "../assets/up-arrow.svg";
+import UploadService from "../services/FileUploadService";
+// STATEMANAGMENT IMPORTS
 import selectedDarkThemeAtom from "../stateManager/atoms/selectedDarkThemeAtom";
 import seeMediaAtom from "../stateManager/atoms/seeMediaAtom";
 import plusSectionAtom from "../stateManager/atoms/plusSectionAtom";
 import roomIdAtom from "../stateManager/atoms/roomIdAtom";
+import fileFromPictureAtom from "../stateManager/atoms/fileFromPictureAtom";
+import isReceivedMediasMessageToUserAtom from "../stateManager/atoms/receiveMediasMessageToUserAtom";
+import imageInfoAtom from "../stateManager/atoms/imageInfoAtom";
+// ASSETS IMPORTS
+import camera from "../assets/Group 54437@2x.png";
+import upArrow from "../assets/up-arrow.svg";
 
 const UploadImages = ({ handleSendMessage, setIsTaping }) => {
   const [state, setState] = useRecoilState(fileFromPictureAtom);

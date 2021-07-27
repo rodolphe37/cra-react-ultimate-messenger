@@ -1,5 +1,7 @@
+// MODULES IMPORTS
 import { useState } from "react";
 import { useRecoilState } from "recoil";
+// STATEMANAGMENT IMPORTS
 import selectedSoundAtom from "../stateManager/atoms/selectedSoundAtom";
 import selectedDarkThemeAtom from "../stateManager/atoms/selectedDarkThemeAtom";
 import selectedLightThemeAtom from "../stateManager/atoms/selectedLightThemeAtom";

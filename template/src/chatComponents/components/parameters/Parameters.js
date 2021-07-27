@@ -1,6 +1,24 @@
+// MODULES IMPORTS
 import { Fragment, useEffect, useState } from "react";
-import ParamIcon from "../../assets/settings.png";
+import { useRecoilState } from "recoil";
+import { useTranslation } from "react-i18next";
+// CSS IMPORTS
 import "./parameters.css";
+// HOOKS IMPORTS
+import useParams from "../../hooks/useParams";
+// STATEMANAGMENT IMPORTS
+import usernameAtom from "../../stateManager/atoms/usernameAtom";
+import validateUsernameAtom from "../../stateManager/atoms/validateUsernameAtom";
+import isSoundNotificationsAtom from "../../stateManager/atoms/isSoundNotifications";
+// COMPONENTS IMPORTS
+import SupressConversations from "../suppressConversationsModal/SupressConversationsModal";
+import ResetModal from "../resetModal/ResetModal";
+// ASSETS IMPORTS
+import seeMedia from "../../assets/yes.svg";
+import notSeeMedia from "../../assets/no.svg";
+import ok from "../../assets/ok.svg";
+import supp from "../../assets/supp.svg";
+import ParamIcon from "../../assets/settings.png";
 import sound from "../../assets/sounds/mixkit-guitar-notification-alert-2320.mp3";
 import sound2 from "../../assets/sounds/mixkit-software-interface-back-2575.mp3";
 import soundToggleParams from "../../assets/sounds/mixkit-fast-double-click-on-mouse-275.mp3";
@@ -8,18 +26,6 @@ import CheckIcon from "../../assets/check.png";
 import Delete from "../../assets/erase.svg";
 import Bell from "../../assets/bell.svg";
 import Disabled from "../../assets/disabled.svg";
-import SupressConversations from "../suppressConversationsModal/SupressConversationsModal";
-import seeMedia from "../../assets/yes.svg";
-import notSeeMedia from "../../assets/no.svg";
-import ResetModal from "../resetModal/ResetModal";
-import useParams from "../../hooks/useParams";
-import { useRecoilState } from "recoil";
-import usernameAtom from "../../stateManager/atoms/usernameAtom";
-import ok from "../../assets/ok.svg";
-import supp from "../../assets/supp.svg";
-import validateUsernameAtom from "../../stateManager/atoms/validateUsernameAtom";
-import { useTranslation } from "react-i18next";
-import isSoundNotificationsAtom from "../../stateManager/atoms/isSoundNotifications";
 
 const Parameters = () => {
   const [username, setUsername] = useRecoilState(usernameAtom);

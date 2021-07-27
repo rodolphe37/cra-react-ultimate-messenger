@@ -1,18 +1,24 @@
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import Bell from "../../assets/sounds/mixkit-fairy-bells-583.mp3";
-import "./videoChatComponent.css";
-import useVideoChat from "../../hooks/useVideoChat";
-import ChatRoom from "../chatRoom/ChatRoom/ChatRoom";
+// MODULES IMPORTS
 import { Fragment, useState } from "react";
 import { isMobile } from "react-device-detect";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useTranslation } from "react-i18next";
+import { useRecoilState } from "recoil";
+// CSS IMPORTS
+import "./videoChatComponent.css";
+// HOOKS IMPORTS
+import useVideoChat from "../../hooks/useVideoChat";
+// STATEMANAGMENT IMPORTS
+import roomIdAtom from "../../stateManager/atoms/roomIdAtom";
+// COMPONENTS IMPORTS
+import ChatRoom from "../chatRoom/ChatRoom/ChatRoom";
+import Loader from "../loader/Loader";
+// ASSETS IMPORTS
 import CallIcon from "../../assets/callTo.svg";
 import CallFrom from "../../assets/callFrom.svg";
 import HangUpCall from "../../assets/hang-up.svg";
 import Assignement from "../../assets/assignment.svg";
-import Loader from "../loader/Loader";
-import { useTranslation } from "react-i18next";
-import { useRecoilState } from "recoil";
-import roomIdAtom from "../../stateManager/atoms/roomIdAtom";
+import Bell from "../../assets/sounds/mixkit-fairy-bells-583.mp3";
 
 const VideoChatComponent = () => {
   const [roomName] = useRecoilState(roomIdAtom);

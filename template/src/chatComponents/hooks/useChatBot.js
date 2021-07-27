@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
+// MODULES IMPORTS
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
+// CONSTANTS IMPORTS
 import {
   prompts,
   replies,
@@ -11,6 +13,7 @@ import {
   love,
   win,
 } from "../constants/constants";
+// STATEMANAGMENT IMPORTS
 import messageForBotAtom from "../stateManager/atoms/messageForBotAtom";
 import roomIdAtom from "../stateManager/atoms/roomIdAtom";
 import weatherAtom from "../stateManager/atoms/weatherAtom";
