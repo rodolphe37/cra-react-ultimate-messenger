@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState, Fragment } from "react";
 import "./bottomDrawer.css";
 import Bavarder from "../../assets/chat.svg";
@@ -12,7 +11,6 @@ import { useTranslation } from "react-i18next";
 import ok from "../../assets/ok.svg";
 import supp from "../../assets/supp.svg";
 import clickedGuestAtom from "../../stateManager/atoms/clickedGuestAtom";
-import clickedUserAtom from "../../stateManager/atoms/clickedUserAtom";
 import logIn from "../../assets/user.svg";
 import logInWhite from "../../assets/user-white.svg";
 import roomIdAtom from "../../stateManager/atoms/roomIdAtom";
@@ -30,8 +28,6 @@ const BottomDrawer = () => {
   const [eraseUsername, setEraseUsername] = useState(true);
   const [isClickedGuestButton, setIsClickedGuestButton] =
     useRecoilState(clickedGuestAtom);
-  const [isClickedUserButton, setIsClickedUserButton] =
-    useRecoilState(clickedUserAtom);
 
   const [roomName, setRoomName] = useRecoilState(roomIdAtom);
 

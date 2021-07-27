@@ -76,7 +76,6 @@ small {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  /* margin-top: -31px; */
 }
 .logout-button {
   font-size: 18px;

@@ -260,7 +260,6 @@ const Parameters = () => {
                 <h1
                   className={selectedDarkTheme ? "white" : "black"}
                   style={{
-                    // marginLeft: "-10px",
                     fontSize: 11,
                     fontWeight: "bold",
                     textAlign: "center",
@@ -361,7 +360,6 @@ const Parameters = () => {
                     style={{
                       fontSize: 10,
                       marginBottom: "-17px",
-                      // marginLeft: -24,
                       marginTop: -13,
                     }}
                   >
@@ -643,8 +641,6 @@ const Parameters = () => {
               <div className="reset-history">
                 <h1
                   style={{
-                    // width: 170,
-                    // textAlign: "center",
                     marginLeft: "5px",
                     fontSize: 10,
                     fontWeight: "bold",
@@ -663,7 +659,6 @@ const Parameters = () => {
               <div className="reset-history">
                 <h1
                   style={{
-                    // width: 170,
                     textAlign: "center",
                     marginLeft: "-4px",
                     fontSize: 10,

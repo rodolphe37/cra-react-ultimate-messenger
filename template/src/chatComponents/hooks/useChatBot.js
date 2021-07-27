@@ -29,7 +29,7 @@ const useChatBot = () => {
   // GET HOUR FOR HORLOGE COMMAND TO BOTCHAT
   let today = new Date();
   let time = `${today.getHours()} heures ${today.getMinutes()} minutes et  ${today.getSeconds()} secondes`;
-  // GET DATE - TIME FOR EACH MESSAGE
+  // GET DATE - TIME FOR COMMAND TO BOTCHAT
   let d = new Date();
   let n = d.toLocaleString();
 
@@ -49,8 +49,7 @@ const useChatBot = () => {
     .replace(/je crois /g, "")
     .replace(/quoi/g, "qu'est-ce que")
     .replace(/s'il te plait /g, "")
-    .replace(/ s'il te plait/g, "")
-    .replace(/r u/g, "tu es");
+    .replace(/ s'il te plait/g, "");
 
   function compare(promptsArray, repliesArray, string) {
     let reply;
@@ -118,7 +117,7 @@ const useChatBot = () => {
     // If no match, check if message contains `joke`
     product = stories[Math.floor(Math.random() * stories.length)];
   } else if (text.match(/(j'ai gagné|yeah|qui le vainquer|super|)/gi)) {
-    // If no match, check if message contains `love conversation`
+    // If no match, check if message contains `game win conversation`
     product = win[Math.floor(Math.random() * win.length)];
   } else {
     // If all else fails: random alternative

@@ -22,14 +22,6 @@
   font-size: 12px;
 }
 
-/* .main-container {
-   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.418)),
-    url("https://i.imgur.com/wRkDzSk.jpg");
-  background-size: cover;
-  background-position: center;
-
-} */
-
 .main-container {
   height: 100%;
   display: flex;
@@ -62,12 +54,6 @@
   background: rgba(236, 232, 232, 0.85);
   box-shadow: 10px 10px 5px 0px rgba(15, 15, 15, 0.404);
 }
-
-/* p {
-  margin-top: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-} */
 
 .city-temp {
   font-size: 2rem;

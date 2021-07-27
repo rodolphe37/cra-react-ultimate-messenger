@@ -54,9 +54,10 @@ const ChatRoom = (props) => {
   const [isSoundNotification, setIsSoundNotification] = useRecoilState(
     isSoundNotificationsAtom
   );
+  // if you want to catch roomId from URL
   // const { roomId } = props.match.params; // Gets roomId from URL
 
-  // USE UUIDV4 FOR GENERATE ID ROOM FOR CHAT
+  // USE UUIDV4 FOR GENERATE ID ROOM FOR CHAT IF YOU WANT
   // useEffect(() => {
   //   if (!roomToken) {
   //     setRoomToken(uuidv4());
@@ -452,21 +453,11 @@ const ChatRoom = (props) => {
 
   function onDelete(messageIdToDelete) {
     const newMessages = messages.filter((i) => i);
-    console.log("new mess", newMessages);
     const reducedArr = newMessages.filter((_, key) => {
       setKeyId(key);
-
-      console.log("key", key);
-
-      // if (key !== keyId) {
-      //   console.log("key!==", key !== Number(keyId));
-      // }
       return key !== keyId;
     });
-
     setMessages(reducedArr);
-    console.log("reducedArr", reducedArr);
-    console.log("key === messageIdToDelete", keyId === messageIdToDelete);
   }
   useEffect(() => {
     if (messageIdToDelete) {
@@ -476,11 +467,6 @@ const ChatRoom = (props) => {
       setMessages([]);
       localStorage.setItem("messages", messages);
     }
-
-    console.log("id from messageIdToDelete :", messageIdToDelete);
-    console.log("id from keyId value:", keyId);
-    console.log("mess", messages);
-    // console.log("arr", arr);
   }, [messageIdToDelete, keyId]);
 
   const handletoggleDeleteButton = () => {

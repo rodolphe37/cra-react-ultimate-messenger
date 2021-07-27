@@ -69,12 +69,8 @@
 
 .video-container {
   display: grid;
-  /* grid-template-columns: 1fr 1fr; */
   justify-content: center;
   align-content: center;
-  /* margin-top: 10rem; */
-  /* margin-left: 10rem;
-  margin-bottom: 61px; */
 }
 
 .caller {
@@ -83,20 +79,6 @@
   position: relative;
   top: -9%;
 }
-
-/* body {
-
-  background: -webkit-linear-gradient(
-    to right,
-    #8e54e9,
-    #4776e6
-  );
-  background: linear-gradient(
-    to right,
-    #8e54e9,
-    #4776e6
-  );
-} */
 .closed-video-chat-cross {
   max-width: 54px;
   border: none;

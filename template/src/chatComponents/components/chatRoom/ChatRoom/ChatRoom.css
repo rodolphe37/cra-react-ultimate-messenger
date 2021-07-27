@@ -70,7 +70,6 @@ button {
   flex: 1 1;
   min-height: 100px;
   overflow: auto;
-  /* border: 1px solid #000; */
   border-radius: 7px 7px 0 0;
   width: 100%;
   top: 8px;
@@ -81,7 +80,6 @@ button {
 .messages-list {
   list-style-type: none;
   padding: 0;
-  /* margin-top: 36px; */
 }
 
 .message-date {
@@ -109,7 +107,6 @@ button {
   word-break: break-word;
   border-radius: 1.1em;
   box-shadow: 0 0 2px 0 rgb(0 0 0 / 5%), 0 8px 16px 0 rgb(0 0 0 / 10%);
-  /* text-indent: 15px; */
   color: white;
   justify-content: center;
   align-items: center;
@@ -215,7 +212,6 @@ button {
 
 .emoji-chat-open {
   display: flex;
-  /* align-items: center; */
   justify-content: center;
   flex-direction: column;
 }
@@ -472,16 +468,9 @@ button {
   top: -37px;
 }
 .preview-picture-content {
-  /* max-width: 190px;
-  max-height: 200px;
-  position: absolute;
-  bottom: 10px;
-  left: 5px; */
   border-radius: 5px;
 }
 .label-custom-button-upload {
-  /* background-color: indigo; */
-  /* color: white; */
   padding: 0.5rem;
   font-family: sans-serif;
   border-radius: 0.3rem;
@@ -509,7 +498,6 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* width: 76%; */
   margin-left: 0em;
   margin-top: 0.54em;
 }
@@ -598,7 +586,6 @@ button {
   width: 120px;
   background-color: black;
   color: #fff;
-  /* text-align: center; */
   border-radius: 6px;
   padding: 5px 0;
   width: 120px;
@@ -607,7 +594,6 @@ button {
   margin-left: -60px;
   position: absolute;
   z-index: 128;
-  /* height: 74px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -616,20 +602,6 @@ button {
 .tooltip:hover .tooltiptext-chatbot {
   visibility: visible;
 }
-
-/* .tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-
-  position: absolute;
-  z-index: 1;
-} */
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
@@ -894,7 +866,6 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-left: 34px; */
 }
 .section-right-top-button {
   display: flex;
@@ -928,7 +899,6 @@ button {
   left: 0;
   top: -23px;
   background: #0e1917cc;
-  /* background: #62e1fb; */
   border-radius: 50%;
   box-shadow: 0px 0px 4px grey;
 }

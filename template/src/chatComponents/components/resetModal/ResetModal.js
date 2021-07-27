@@ -9,7 +9,7 @@ import { useRecoilState } from "recoil";
 import selectedDarkThemeAtom from "../../stateManager/atoms/selectedDarkThemeAtom";
 import { useTranslation } from "react-i18next";
 
-const ResetModal = ({ handleDeleteConversations }) => {
+const ResetModal = () => {
   const [isResetSound, setIsResetSound] = useState(false);
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
   const { t } = useTranslation();

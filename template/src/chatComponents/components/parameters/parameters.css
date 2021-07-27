@@ -16,8 +16,6 @@
   width: 23px;
   height: 23px;
   margin-top: 2px;
-  /* margin-left: 7em;
-  margin-right: -9em; */
   cursor: pointer;
 }
 .params-icon-anim {
@@ -32,18 +30,6 @@
 .params-container {
   position: relative;
 }
-/* .settings-content {
-  position: absolute;
-  width: 117px;
-  top: 46px;
-  left: 15px;
-  right: 0;
-  background: white;
-  height: 11vh;
-  text-align: center;
-  box-shadow: 2px 3px 7px grey;
-  border-radius: 0 0 7px 7px;
-} */
 
 #toolTip {
   border: 1px solid #73a7f0;
@@ -157,7 +143,6 @@
 }
 .sounds {
   margin-top: -26px;
-  /* margin-left: -4px; */
 }
 .listTheme-button {
   text-align: center;
@@ -180,13 +165,10 @@
   margin-left: -2px;
   border-radius: 50%;
   height: 36px;
-  /* margin-left: 30px; */
 }
 .sound-list {
-  /* display: flex; */
   align-items: center;
   justify-content: center;
-  /* margin-left: -10px; */
 }
 .reset-history {
   display: flex;
@@ -223,18 +205,6 @@
 .danger-toggled > .reset-history:last-child {
   margin-top: 15px !important;
 }
-
-/* .resetApp {
-  border: 1px solid red;
-  padding: 6px;
-  width: 43%;
-  border-radius: 19%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #da7d7da8;
-  margin-bottom: 15px;
-} */
 .danger-zone {
   border: 1px solid red;
   border-radius: 7px;
@@ -393,7 +363,6 @@
   border: none;
   position: relative;
   left: 0;
-  /* margin-left: -11px; */
   box-shadow: 1px 0px 6px grey;
   overflow: hidden;
   border-radius: 9px;
@@ -421,8 +390,6 @@
   display: inherit;
   width: 55px;
   height: 55px;
-  /* margin-left: 88px; */
-  /* margin-top: -49px; */
   transition: all 0.4s ease-in-out;
 }
 .theme-change-picture {

@@ -70,10 +70,6 @@ export const alternative = [
   "Je suis tout ouïe",
   "Je ne comprends pas. 🤨",
   "soit plus clair et conçis",
-  // "de merde ça fait chier",
-  // "V'la du PQ",
-  // "Fuck toi même, petit impoli 🖕🏼🖕🏼",
-  // "Parle pas de toi comme ça voyons !!!",
 ];
 
 // Whatever else you want :)

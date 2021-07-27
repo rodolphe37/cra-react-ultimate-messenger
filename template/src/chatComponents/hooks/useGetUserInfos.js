@@ -35,6 +35,7 @@ const useGetUserInfos = () => {
   }, []);
 
   useEffect(() => {
+    // IF YOU WANT TO USE GEOLOCATION LONGITUDE & LATITUDE FOR KNOWING THE CITY NAME
     // axios
     //   .get(
     //     `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=fr`

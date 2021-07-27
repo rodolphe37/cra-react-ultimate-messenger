@@ -96,7 +96,7 @@ const useChat = () => {
       username: username,
       isEmoji: isNotAlphaNumeric(regEmoji),
     });
-    // // BOTCHAT EXPERIMENTATION
+    // // BOTCHAT CONVERSATION
     if (messageBody.includes("#")) {
       socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
         picture: botPict,
@@ -104,7 +104,7 @@ const useChat = () => {
         senderId: false,
       });
     }
-    //END BOTCHAT EXPERIMENTATION
+    //END BOTCHAT CONVERSATION
   };
   //  START TYPING NOTIFICATION
   const startTypingMessage = () => {

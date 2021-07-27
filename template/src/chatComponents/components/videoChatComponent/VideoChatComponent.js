@@ -2,7 +2,6 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import Bell from "../../assets/sounds/mixkit-fairy-bells-583.mp3";
 import "./videoChatComponent.css";
 import useVideoChat from "../../hooks/useVideoChat";
-// import { useHistory } from "react-router-dom";
 import ChatRoom from "../chatRoom/ChatRoom/ChatRoom";
 import { Fragment, useState } from "react";
 import { isMobile } from "react-device-detect";
@@ -16,7 +15,6 @@ import { useRecoilState } from "recoil";
 import roomIdAtom from "../../stateManager/atoms/roomIdAtom";
 
 const VideoChatComponent = () => {
-  // let history = useHistory();
   const [roomName] = useRecoilState(roomIdAtom);
 
   const {

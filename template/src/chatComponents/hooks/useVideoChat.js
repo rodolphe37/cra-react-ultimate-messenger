@@ -96,16 +96,8 @@ const useVideoChat = () => {
     connectionRef.current = peer;
   };
 
-  // if (messages !== []) {
-  //   let someMess = messages.map((res) =>
-  //     res.body.includes("Invitation vidéo, copiez l'id afin de vous connecter:")
-  //   );
-  // }
-
   const leaveCall = () => {
     setCallEnded(true);
-    // messages.pop();
-    // setMessages(messages);
     setTimeout(() => {
       window.location.replace(`/chat/${roomName}`);
     }, 1200);

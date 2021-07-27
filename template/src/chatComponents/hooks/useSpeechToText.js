@@ -14,7 +14,7 @@ const useSpeechToText = () => {
   const [isListening, setIsListening] = useRecoilState(isListeningAtom);
   const microphoneRef = useRef(null);
   const { setIsTaping, setNewMessage } = useChat(roomIdAtom);
-  // const { i18n } = useTranslation();
+  // const { i18n, t } = useTranslation();
   const [speechToTextConversion, setSpeechToTextConversion] =
     useRecoilState(speechToTextAtom);
   const [isLanguage] = useRecoilState(isLanguageAtom);
