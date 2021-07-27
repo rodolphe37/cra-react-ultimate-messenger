@@ -43,6 +43,8 @@ import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 import usernameAtom from "../../../stateManager/atoms/usernameAtom";
 import DeleteBubble from "../../../assets/delete-left-icon.svg";
 import DeleteBubbleRight from "../../../assets/delete-right-icon.svg";
+import DeleteBubbleDarkTheme from "../../../assets/delete-left-icon.svg";
+import DeleteBubbleRightDarkTheme from "../../../assets/delete-right-icon.svg";
 
 const ChatRoom = (props) => {
   let history = useHistory();
@@ -798,7 +800,11 @@ const ChatRoom = (props) => {
                             }}
                             src={
                               !message.ownedByCurrentUser
-                                ? DeleteBubble
+                                ? selectedDarkTheme
+                                  ? DeleteBubbleDarkTheme
+                                  : DeleteBubble
+                                : selectedDarkTheme
+                                ? DeleteBubbleRightDarkTheme
                                 : DeleteBubbleRight
                             }
                             alt="del"
