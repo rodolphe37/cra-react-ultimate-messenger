@@ -984,12 +984,12 @@ button {
 .leftBubble {
   left: 192px;
 }
-.slide-in-right {
-  animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+.fade-in-right {
+  animation: fade-in-right 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
-@keyframes slide-in-right {
+@keyframes fade-in-right {
   0% {
-    transform: translateX(50px);
+    transform: translateX(25px);
     opacity: 0;
   }
   100% {
@@ -997,12 +997,13 @@ button {
     opacity: 1;
   }
 }
-.slide-in-left {
-  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+
+.fade-in-left {
+  animation: fade-in-left 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
-@keyframes slide-in-left {
+@keyframes fade-in-left {
   0% {
-    transform: translateX(-50px);
+    transform: translateX(-25px);
     opacity: 0;
   }
   100% {

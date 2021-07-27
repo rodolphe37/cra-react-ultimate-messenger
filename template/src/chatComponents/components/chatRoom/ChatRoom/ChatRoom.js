@@ -41,8 +41,8 @@ import Loader from "../../loader/Loader";
 import isSoundNotificationsAtom from "../../../stateManager/atoms/isSoundNotifications";
 import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 import usernameAtom from "../../../stateManager/atoms/usernameAtom";
-import DeleteBubble from "../../../assets/delete-bubble.svg";
-import DeleteBubbleRight from "../../../assets/delete-bubble-right.svg";
+import DeleteBubble from "../../../assets/delete-left-icon.svg";
+import DeleteBubbleRight from "../../../assets/delete-right-icon.svg";
 
 const ChatRoom = (props) => {
   let history = useHistory();
@@ -635,37 +635,6 @@ const ChatRoom = (props) => {
                         }`}
                         onClick={handletoggleDeleteButton}
                       >
-                        <button
-                          className={
-                            message.ownedByCurrentUser
-                              ? toggleDeleteButton
-                                ? "deleteIconBubble slide-in-right"
-                                : "deleteIconBubble hiddenParams"
-                              : toggleDeleteButton
-                              ? "deleteIconBubble leftBubble slide-in-left "
-                              : "deleteIconBubble hiddenparams"
-                          }
-                          onClick={() => {
-                            setMessageIsToDelete(i);
-                          }}
-                        >
-                          <img
-                            style={{
-                              width: 44,
-                            }}
-                            src={
-                              !message.ownedByCurrentUser
-                                ? DeleteBubble
-                                : DeleteBubbleRight
-                            }
-                            alt="del"
-                            className={
-                              toggleDeleteButton
-                                ? "delete-bubble"
-                                : "hiddenParams"
-                            }
-                          />
-                        </button>
                         {message.picture && (
                           <span className="messagesContent">
                             <img
@@ -809,6 +778,37 @@ const ChatRoom = (props) => {
                             <Weather />
                           </div>
                         ) : null}
+                        <button
+                          className={
+                            message.ownedByCurrentUser
+                              ? toggleDeleteButton
+                                ? "deleteIconBubble fade-in-right"
+                                : "deleteIconBubble hiddenParams"
+                              : toggleDeleteButton
+                              ? "deleteIconBubble leftBubble fade-in-left "
+                              : "deleteIconBubble hiddenparams"
+                          }
+                          onClick={() => {
+                            setMessageIsToDelete(i);
+                          }}
+                        >
+                          <img
+                            style={{
+                              width: 44,
+                            }}
+                            src={
+                              !message.ownedByCurrentUser
+                                ? DeleteBubble
+                                : DeleteBubbleRight
+                            }
+                            alt="del"
+                            className={
+                              toggleDeleteButton
+                                ? "delete-bubble"
+                                : "hiddenParams"
+                            }
+                          />
+                        </button>
                       </li>
                       <div ref={messagesEndRef} />
                     </span>
