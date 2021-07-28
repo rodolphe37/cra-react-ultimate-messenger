@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomeChat from "./chatComponents/components/chatRoom/HomeChat/HomeChat";
 import logo from "./logo.svg";
@@ -13,6 +13,9 @@ import Loader from "./chatComponents/components/loader/Loader";
 import { useTranslation } from "react-i18next";
 import BottomDrawer from "./chatComponents/components/bottomDrawer/BottomDrawer";
 import Weather from "./chatComponents/components/weatherComponent/WeatherComponent";
+// THIS TWO IMPORTS ARE ONLY FOR THE EXAMPLE
+import exampleSelector from "./chatComponents/stateManager/selectors/exampleSelector";
+import exampleClickedAtom from "./chatComponents/stateManager/atoms/exampleClicked";
 
 const App = () => {
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
@@ -21,6 +24,26 @@ const App = () => {
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
+
+  // EXAMPLE OF HOW TO USE RECOIL (ATOM AND SELECTOR) WITH EASE
+  const [exampleState] = useRecoilState(exampleSelector);
+  const [clickedExample, setClickedExample] =
+    useRecoilState(exampleClickedAtom);
+
+  const handleClickExampleSelector = () => {
+    if (!clickedExample) {
+      setClickedExample(true);
+    }
+    if (clickedExample) {
+      setClickedExample(false);
+    }
+  };
+
+  useEffect(() => {
+    console.log("selector :", exampleState);
+    console.log("clicked :", clickedExample);
+  }, [exampleState, clickedExample]);
+  // END OF EXAMPLE RECOIL STATE MANAGMENT
 
   return (
     <Fragment>
@@ -62,7 +85,16 @@ const App = () => {
               : "App-header dark-background "
           }
         >
-          <img src={logo} className="App-logo" alt="logo" />
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={handleClickExampleSelector}
+          >
+            <img src={logo} className="App-logo" alt="logo" />
+          </span>
+          <p style={{ fontSize: 17 }}>
+            This is an Recoil Atom & Selector usage example:
+          </p>
+          <p style={{ fontSize: 15 }}>{exampleState}</p>
           <p>
             {t("editAppText")} <code>src/App.js</code> {t("saveAppText")}
           </p>
