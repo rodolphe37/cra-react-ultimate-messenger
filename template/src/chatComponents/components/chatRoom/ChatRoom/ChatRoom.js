@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { useTranslation } from "react-i18next";
 import { isAndroid, isIOS, isBrowser } from "react-device-detect";
+// import { v4 as uuidv4 } from "uuid";
 // CSS IMPORTS
 import "./ChatRoom.css";
 // HOOKS & SERVICES IMPORTS
@@ -49,8 +50,7 @@ import DeleteBubble from "../../../assets/delete-left-icon.svg";
 import DeleteBubbleRight from "../../../assets/delete-right-icon.svg";
 import DeleteBubbleDarkTheme from "../../../assets/delete-left-icon-dark.svg";
 import DeleteBubbleRightDarkTheme from "../../../assets/delete-right-icon-dark.svg";
-
-// import { v4 as uuidv4 } from "uuid";
+import Thumb from "../../../assets/thumbs-up-facebook.svg";
 
 const ChatRoom = (props) => {
   let history = useHistory();
@@ -158,6 +158,7 @@ const ChatRoom = (props) => {
   const [clickedCopyId, setClickedCopyId] = useState(false);
   const [idChatInvitation, setIdChatInvitation] = useState("");
   const [toggleDeleteButton, setToggleDeleteButton] = useState(false);
+  const [isSendThumb, setIsSendThumb] = useState(false);
 
   let d = new Date();
   let n = d.toLocaleString();
@@ -226,6 +227,10 @@ const ChatRoom = (props) => {
       }, 200);
     }
   };
+  const handleSendThumb = () => {
+    setIsSendThumb(true);
+    setNewMessage("thumbs-up-facebook.svg");
+  };
 
   const handleClickOnName = () => {
     if (clickedOnName) {
@@ -254,7 +259,13 @@ const ChatRoom = (props) => {
         imageInfos: response.data,
       });
     });
-  }, [setState]);
+    if (newMessage.includes("thumbs-up-facebook.svg")) {
+      setTimeout(() => {
+        sendMessage(newMessage);
+        setNewMessage("");
+      }, 300);
+    }
+  }, [setState, newMessage]);
 
   const handleClickChevron = () => {
     if (!clickedChevron) {
@@ -392,7 +403,7 @@ const ChatRoom = (props) => {
 
   // WEB PUSH SECTION
   useEffect(() => {
-    // THIS WEBPUSH APPEAR LIKE WELCOME MESSAGE
+    // THIS WEBPUSH APPEAR ONLY IF IS BROWSER OR ANDROID PHONES
     if (isBrowser || isAndroid) {
       // THIS FIRST WEBPUSH IS WELCOME MESSAGE
       Notification.requestPermission((result) => {
@@ -449,11 +460,14 @@ const ChatRoom = (props) => {
         }
       }
     }
+    // FOR IPHONE - IMPLEMENT WHAT YOU WANT
     if (isIOS) {
       // alert("This is an Iphone")
     }
   }, [username, messages]);
   // END OF WEBPUSH SECTION
+
+  // DELETE MESSAGE SECTION - NOT REALLY FUNCTIONAL - IT'S NOT EXACTELY WHAT I WANT
   const [messageIdToDelete, setMessageIsToDelete] = useState("");
   const [keyId, setKeyId] = useState("");
 
@@ -483,6 +497,7 @@ const ChatRoom = (props) => {
       setToggleDeleteButton(true);
     }
   };
+  // END OF DELETE MESSAGE SECTION
 
   return (
     <Fragment>
@@ -715,6 +730,7 @@ const ChatRoom = (props) => {
                             )}
                           </Fragment>
                         ) : !message.picture &&
+                          !message.body.includes("thumbs-up-facebook.svg") &&
                           isNotAlphaNumeric(message.body) ? (
                           <p
                             style={{
@@ -726,7 +742,9 @@ const ChatRoom = (props) => {
                             {message.body}
                           </p>
                         ) : (
-                          !message.picture && message.body
+                          !message.picture &&
+                          !message.body.includes("thumbs-up-facebook.svg") &&
+                          message.body
                         )}
                         {message.body.includes("Invitation vidéo") ||
                         message.body.includes("Video invitation")
@@ -756,6 +774,13 @@ const ChatRoom = (props) => {
                               </Fragment>
                             ))
                           : null}
+                        {message.body.includes("thumbs-up-facebook.svg") && (
+                          <img
+                            style={{ width: 40, cursor: "pointer" }}
+                            src={Thumb}
+                            alt="thumb"
+                          />
+                        )}
                         {message.body.includes("&météo") ? (
                           <div
                             className={
@@ -910,6 +935,16 @@ const ChatRoom = (props) => {
             </div>
             <span className={plusSection ? "" : "hiddenParams"}>
               <SpeechToText />
+            </span>
+            <span
+              className={plusSection ? "" : "hiddenParams"}
+              onClick={handleSendThumb}
+            >
+              <img
+                style={{ width: 27, cursor: "pointer" }}
+                src={Thumb}
+                alt="thumb"
+              />
             </span>
             <span
               className={
