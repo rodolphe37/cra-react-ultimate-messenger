@@ -259,13 +259,7 @@ const ChatRoom = (props) => {
         imageInfos: response.data,
       });
     });
-    if (newMessage.includes("thumbs-up-facebook.svg")) {
-      setTimeout(() => {
-        sendMessage(newMessage);
-        setNewMessage("");
-      }, 300);
-    }
-  }, [setState, newMessage]);
+  }, [setState]);
 
   const handleClickChevron = () => {
     if (!clickedChevron) {
@@ -291,6 +285,14 @@ const ChatRoom = (props) => {
       }, 2000);
     }
   };
+  useEffect(() => {
+    if (newMessage.includes("thumbs-up-facebook.svg")) {
+      setTimeout(() => {
+        sendMessage(newMessage);
+        setNewMessage("");
+      }, 300);
+    }
+  }, [newMessage]);
 
   function allInfos() {
     userInfos.map((res) =>
@@ -730,7 +732,6 @@ const ChatRoom = (props) => {
                             )}
                           </Fragment>
                         ) : !message.picture &&
-                          !message.body.includes("thumbs-up-facebook.svg") &&
                           isNotAlphaNumeric(message.body) ? (
                           <p
                             style={{
