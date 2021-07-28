@@ -4,7 +4,7 @@
   "license": "(MIT OR Apache-2.0)",
   "author": "Rodolphe Augusto",
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "main": "template.json",
   "description": "A quick start Create React App with full chat application",
