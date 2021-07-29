@@ -786,6 +786,7 @@ const ChatRoom = (props) => {
                           : null}
                         {message.body.includes("thumbs-up-facebook.svg") && (
                           <img
+                            className="shake-bottom"
                             style={{ width: 40, cursor: "pointer" }}
                             src={Thumb}
                             alt="thumb"
@@ -813,10 +814,10 @@ const ChatRoom = (props) => {
                             className={
                               message.ownedByCurrentUser
                                 ? toggleDeleteButton
-                                  ? "deleteIconBubble fade-in-right"
+                                  ? "deleteIconBubble scale-in-center"
                                   : "deleteIconBubble hiddenParams"
                                 : toggleDeleteButton
-                                ? "deleteIconBubble leftBubble fade-in-left "
+                                ? "deleteIconBubble leftBubble scale-in-center "
                                 : "deleteIconBubble hiddenparams"
                             }
                             onClick={() => {
