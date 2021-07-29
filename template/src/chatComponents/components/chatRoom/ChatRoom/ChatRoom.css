@@ -112,6 +112,7 @@ button {
   align-items: center;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .my-message {

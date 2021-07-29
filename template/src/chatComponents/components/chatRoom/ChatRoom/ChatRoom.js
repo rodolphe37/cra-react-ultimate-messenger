@@ -465,6 +465,7 @@ const ChatRoom = (props) => {
   // END OF WEBPUSH SECTION
 
   // DELETE MESSAGE SECTION
+  const [idForDeleteButton, setIdForDeleteButton] = useState("");
   const [messageIdToDelete, setMessageIsToDelete] = useState("");
   const newMessages = messages.filter((i) => i);
 
@@ -477,6 +478,18 @@ const ChatRoom = (props) => {
     }
     setMessages(newMessages);
   }
+  const handletoggleDeleteButton = () => {
+    // setIdForDeleteButton(newMessage.id);
+    if (toggleDeleteButton) {
+      setToggleDeleteButton(false);
+    }
+    if (!toggleDeleteButton) {
+      setToggleDeleteButton(true);
+      setTimeout(() => {
+        setToggleDeleteButton(false);
+      }, 6000);
+    }
+  };
   useEffect(() => {
     if (messageIdToDelete) {
       onDelete();
@@ -488,16 +501,10 @@ const ChatRoom = (props) => {
       setMessages([]);
       localStorage.setItem("messages", messages);
     }
-  }, [messageIdToDelete]);
 
-  const handletoggleDeleteButton = () => {
-    if (toggleDeleteButton) {
-      setToggleDeleteButton(false);
-    }
-    if (!toggleDeleteButton) {
-      setToggleDeleteButton(true);
-    }
-  };
+    console.log("id for button :", idForDeleteButton);
+  }, [messageIdToDelete, idForDeleteButton]);
+
   // END OF DELETE MESSAGE SECTION
 
   return (
@@ -643,7 +650,10 @@ const ChatRoom = (props) => {
                             ? "my-message"
                             : "received-message"
                         }`}
-                        onClick={handletoggleDeleteButton}
+                        onClick={() => {
+                          setIdForDeleteButton(message.id);
+                          handletoggleDeleteButton();
+                        }}
                       >
                         {message.picture && (
                           <span className="messagesContent">
@@ -697,7 +707,9 @@ const ChatRoom = (props) => {
                                     </p>
                                   </Fragment>
                                 )}
-                                <div ref={messagesEndRef} />
+                                {!toggleDeleteButton && (
+                                  <div ref={messagesEndRef} />
+                                )}
                               </span>
                             ) : (
                               <span
@@ -726,7 +738,9 @@ const ChatRoom = (props) => {
                                 <p className="seingMedia-text">
                                   {t("functionSettingPicture")}
                                 </p>
-                                <div ref={messagesEndRef} />
+                                {!toggleDeleteButton && (
+                                  <div ref={messagesEndRef} />
+                                )}
                               </span>
                             )}
                           </Fragment>
@@ -799,7 +813,7 @@ const ChatRoom = (props) => {
                           </div>
                         ) : null}
 
-                        {message.id ? (
+                        {message.id === idForDeleteButton ? (
                           <button
                             className={
                               message.ownedByCurrentUser
@@ -829,9 +843,9 @@ const ChatRoom = (props) => {
                           </button>
                         ) : null}
                       </li>
-                      <div ref={messagesEndRef} />
+                      {!toggleDeleteButton && <div ref={messagesEndRef} />}
                     </span>
-                    <div ref={messagesEndRef} />
+                    {!toggleDeleteButton && <div ref={messagesEndRef} />}
                   </span>
                 );
               })}
