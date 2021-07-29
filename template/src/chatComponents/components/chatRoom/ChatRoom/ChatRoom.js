@@ -461,6 +461,9 @@ const ChatRoom = (props) => {
     if (isIOS) {
       // alert("This is an Iphone")
     }
+    // console.log("yourUserName ", yourUserName);
+    // console.log("youAreCalled ", youAreCalled);
+    // console.log(youAreCalled.includes(`${yourUserName}`));
   }, [username, messages]);
   // END OF WEBPUSH SECTION
 
@@ -497,11 +500,6 @@ const ChatRoom = (props) => {
       setMessageIsToDelete("");
       setIsSoundNotification(true);
     }
-    if (onDelete && messageIdToDelete === 0) {
-      setMessages([]);
-      localStorage.setItem("messages", messages);
-    }
-
     console.log("id for button :", idForDeleteButton);
   }, [messageIdToDelete, idForDeleteButton]);
 
