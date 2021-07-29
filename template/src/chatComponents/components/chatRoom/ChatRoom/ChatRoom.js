@@ -46,10 +46,6 @@ import sound2 from "../../../assets/sounds/mixkit-software-interface-back-2575.m
 import VideoCall from "../../../assets/video-chat-icon.svg";
 import plus from "../../../assets/plus.svg";
 import cloud from "../../../assets/cloudy.svg";
-import DeleteBubble from "../../../assets/delete-left-icon.svg";
-import DeleteBubbleRight from "../../../assets/delete-right-icon.svg";
-import DeleteBubbleDarkTheme from "../../../assets/delete-left-icon-dark.svg";
-import DeleteBubbleRightDarkTheme from "../../../assets/delete-right-icon-dark.svg";
 import Thumb from "../../../assets/thumbs-up-facebook.svg";
 import DeleteConvButton from "../../../assets/x-button.svg";
 
@@ -154,8 +150,6 @@ const ChatRoom = (props) => {
   const { t } = useTranslation();
   const [messageForBot, setMessageForBot] = useRecoilState(messageForBotAtom);
 
-  // TODO STATE ATOM & LOGIQUE POUR SUPPRIMER LE DERNIER MESSAGE(MESSAGE CONTENANT L'ID DE L'APPEL) QUAND LA CALL EST END --
-  // VIDER L'IDCHATINVITATION QUAND LE CALL EST END PUIS SUPPRIMER LES DERNIER MESSAGE (POP || PUSH METHODE A VOIR) (SI CONTIENT INVITATION VIDÉO) EN MÊME TEMPS.
   const [clickedCopyId, setClickedCopyId] = useState(false);
   const [idChatInvitation, setIdChatInvitation] = useState("");
   const [toggleDeleteButton, setToggleDeleteButton] = useState(false);
@@ -828,18 +822,10 @@ const ChatRoom = (props) => {
                               style={{
                                 width: 24,
                               }}
-                              src={
-                                !message.ownedByCurrentUser && message.id
-                                  ? selectedDarkTheme
-                                    ? DeleteBubbleDarkTheme
-                                    : DeleteConvButton
-                                  : selectedDarkTheme
-                                  ? DeleteBubbleRightDarkTheme
-                                  : DeleteConvButton
-                              }
+                              src={DeleteConvButton}
                               alt="del"
                               className={
-                                toggleDeleteButton
+                                message.id && toggleDeleteButton
                                   ? "delete-bubble"
                                   : "hiddenParams"
                               }

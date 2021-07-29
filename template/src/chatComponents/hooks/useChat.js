@@ -48,6 +48,17 @@ const useChat = () => {
     trade: undefined,
   });
 
+  function getNextMessageId() {
+    let messageId = 0;
+    for (let a = 0; a < messages.length; a++) {
+      if (messages[a].id > messageId) {
+        messageId = messages[a].id;
+      }
+    }
+    messageId++;
+    return messageId;
+  }
+
   useEffect(() => {
     // Creates a WebSocket connection
     socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
@@ -98,6 +109,7 @@ const useChat = () => {
       ip: userAllInfos.ip,
       username: username,
       isEmoji: isNotAlphaNumeric(regEmoji),
+      id: getNextMessageId(),
     });
     // // BOTCHAT CONVERSATION
     if (messageBody.includes("#")) {
