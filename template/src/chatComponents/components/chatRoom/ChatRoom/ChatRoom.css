@@ -938,6 +938,7 @@ button {
   padding-top: 7px;
   padding-bottom: 7px;
   text-indent: 15px;
+  width: 50%;
 }
 
 .roomId-test > input:focus,
