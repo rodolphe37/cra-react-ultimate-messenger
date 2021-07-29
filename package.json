@@ -26,13 +26,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rodolphe37/cra-react-ultimate-messenger.git",
+    "url": "git+https://github.com/rodolphe37/cra-react-ultimate-messenger",
     "directory": "/"
   },
   "bugs": {
-    "url": "https://github.com/rodolphe37/cra-react-ultimate-messenger.git/issues"
+    "url": "https://github.com/rodolphe37/cra-react-ultimate-messenger/issues"
   },
-  "homepage": "https://github.com/rodolphe37/cra-react-ultimate-messenger.git#readme",
+  "homepage": "https://github.com/rodolphe37/cra-react-ultimate-messenger#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://npm.pkg.github.com"

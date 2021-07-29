@@ -51,6 +51,7 @@ import DeleteBubbleRight from "../../../assets/delete-right-icon.svg";
 import DeleteBubbleDarkTheme from "../../../assets/delete-left-icon-dark.svg";
 import DeleteBubbleRightDarkTheme from "../../../assets/delete-right-icon-dark.svg";
 import Thumb from "../../../assets/thumbs-up-facebook.svg";
+import DeleteConvButton from "../../../assets/x-button.svg";
 
 const ChatRoom = (props) => {
   let history = useHistory();
@@ -469,27 +470,35 @@ const ChatRoom = (props) => {
   }, [username, messages]);
   // END OF WEBPUSH SECTION
 
-  // DELETE MESSAGE SECTION - NOT REALLY FUNCTIONAL - IT'S NOT EXACTELY WHAT I WANT
+  // DELETE MESSAGE SECTION
   const [messageIdToDelete, setMessageIsToDelete] = useState("");
-  const [keyId, setKeyId] = useState("");
+  const newMessages = messages.filter((i) => i);
 
-  function onDelete(messageIdToDelete) {
-    const newMessages = messages.filter((i) => i);
-    const reducedArr = newMessages.filter((_, key) => {
-      setKeyId(key);
-      return key !== keyId;
-    });
-    setMessages(reducedArr);
+  function onDelete() {
+    for (let i = 0; i < newMessages.length; i++) {
+      if (newMessages[i].id === messageIdToDelete) {
+        newMessages.splice(i, 1);
+        i--; //re-adjust the counter.
+      }
+    }
+    setMessages(newMessages);
   }
   useEffect(() => {
     if (messageIdToDelete) {
       onDelete();
+      setIsSoundNotification(false);
+      // setTimeout(() => {
+      //   setIsSoundNotification(true);
+      // }, 2000);
     }
+    // if (!messageIdToDelete) {
+    //   setIsSoundNotification(true);
+    // }
     if (onDelete && messageIdToDelete === 0) {
       setMessages([]);
       localStorage.setItem("messages", messages);
     }
-  }, [messageIdToDelete, keyId]);
+  }, [messageIdToDelete]);
 
   const handletoggleDeleteButton = () => {
     if (toggleDeleteButton) {
@@ -798,41 +807,44 @@ const ChatRoom = (props) => {
                             <Weather />
                           </div>
                         ) : null}
-                        <button
-                          className={
-                            message.ownedByCurrentUser
-                              ? toggleDeleteButton
-                                ? "deleteIconBubble fade-in-right"
-                                : "deleteIconBubble hiddenParams"
-                              : toggleDeleteButton
-                              ? "deleteIconBubble leftBubble fade-in-left "
-                              : "deleteIconBubble hiddenparams"
-                          }
-                          onClick={() => {
-                            setMessageIsToDelete(i);
-                          }}
-                        >
-                          <img
-                            style={{
-                              width: 44,
-                            }}
-                            src={
-                              !message.ownedByCurrentUser
-                                ? selectedDarkTheme
-                                  ? DeleteBubbleDarkTheme
-                                  : DeleteBubble
-                                : selectedDarkTheme
-                                ? DeleteBubbleRightDarkTheme
-                                : DeleteBubbleRight
-                            }
-                            alt="del"
+
+                        {message.id ? (
+                          <button
                             className={
-                              toggleDeleteButton
-                                ? "delete-bubble"
-                                : "hiddenParams"
+                              message.ownedByCurrentUser
+                                ? toggleDeleteButton
+                                  ? "deleteIconBubble fade-in-right"
+                                  : "deleteIconBubble hiddenParams"
+                                : toggleDeleteButton
+                                ? "deleteIconBubble leftBubble fade-in-left "
+                                : "deleteIconBubble hiddenparams"
                             }
-                          />
-                        </button>
+                            onClick={() => {
+                              setMessageIsToDelete(message.id);
+                            }}
+                          >
+                            <img
+                              style={{
+                                width: 24,
+                              }}
+                              src={
+                                !message.ownedByCurrentUser && message.id
+                                  ? selectedDarkTheme
+                                    ? DeleteBubbleDarkTheme
+                                    : DeleteConvButton
+                                  : selectedDarkTheme
+                                  ? DeleteBubbleRightDarkTheme
+                                  : DeleteConvButton
+                              }
+                              alt="del"
+                              className={
+                                toggleDeleteButton
+                                  ? "delete-bubble"
+                                  : "hiddenParams"
+                              }
+                            />
+                          </button>
+                        ) : null}
                       </li>
                       <div ref={messagesEndRef} />
                     </span>
