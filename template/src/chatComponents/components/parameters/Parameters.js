@@ -312,7 +312,7 @@ const Parameters = () => {
                         </p>
                       </b>
                     </button>
-                    {isSoundNotification && clickedSound1 && (
+                    {clickedParams && isSoundNotification && clickedSound1 && (
                       <audio autoPlay>
                         <source src={sound} />
                       </audio>
@@ -353,7 +353,7 @@ const Parameters = () => {
                         </p>
                       </b>
                     </button>
-                    {isSoundNotification && clickedSound2 && (
+                    {clickedParams && isSoundNotification && clickedSound2 && (
                       <audio autoPlay>
                         <source src={sound2} />
                       </audio>

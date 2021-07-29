@@ -591,20 +591,26 @@ const ChatRoom = (props) => {
                 return (
                   <span key={i} className="messages-section">
                     <span>
-                      {!isLoaded &&
-                        clickedSound1 &&
-                        !message.ownedByCurrentUser && (
-                          <audio autoPlay>
-                            <source src={sound} />
-                          </audio>
-                        )}
-                      {!isLoaded &&
-                        clickedSound2 &&
-                        !message.ownedByCurrentUser && (
-                          <audio autoPlay>
-                            <source src={sound2} />
-                          </audio>
-                        )}
+                      {!message.ownedByCurrentUser ? (
+                        <span>
+                          {clickedSound1 && (
+                            <audio autoPlay>
+                              <source src={sound} />
+                            </audio>
+                          )}
+                        </span>
+                      ) : null}
+
+                      {!message.ownedByCurrentUser ? (
+                        <span>
+                          {clickedSound2 && (
+                            <audio autoPlay>
+                              <source src={sound2} />
+                            </audio>
+                          )}
+                        </span>
+                      ) : null}
+
                       <ul className="message-date">{message.timeStamp}</ul>
                       <p
                         onClick={handleClickOnName}
