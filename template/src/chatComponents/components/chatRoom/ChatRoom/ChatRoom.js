@@ -481,6 +481,8 @@ const ChatRoom = (props) => {
     if (messageIdToDelete) {
       onDelete();
       setIsSoundNotification(false);
+      setMessageIsToDelete("");
+      setIsSoundNotification(true);
     }
     if (onDelete && messageIdToDelete === 0) {
       setMessages([]);
