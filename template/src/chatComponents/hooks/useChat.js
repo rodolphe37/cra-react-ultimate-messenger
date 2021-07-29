@@ -113,11 +113,14 @@ const useChat = () => {
     });
     // // BOTCHAT CONVERSATION
     if (messageBody.includes("#")) {
-      socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
-        picture: botPict,
-        body: product,
-        senderId: false,
-      });
+      setTimeout(() => {
+        socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
+          picture: botPict,
+          body: product,
+          senderId: false,
+          id: getNextMessageId(),
+        });
+      }, 1000);
     }
     //END BOTCHAT CONVERSATION
   };
