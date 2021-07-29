@@ -481,13 +481,7 @@ const ChatRoom = (props) => {
     if (messageIdToDelete) {
       onDelete();
       setIsSoundNotification(false);
-      // setTimeout(() => {
-      //   setIsSoundNotification(true);
-      // }, 2000);
     }
-    // if (!messageIdToDelete) {
-    //   setIsSoundNotification(true);
-    // }
     if (onDelete && messageIdToDelete === 0) {
       setMessages([]);
       localStorage.setItem("messages", messages);

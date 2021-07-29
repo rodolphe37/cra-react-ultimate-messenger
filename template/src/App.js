@@ -16,13 +16,17 @@ import Weather from "./chatComponents/components/weatherComponent/WeatherCompone
 // THIS TWO IMPORTS ARE ONLY FOR THE EXAMPLE
 import exampleSelector from "./chatComponents/stateManager/selectors/exampleSelector";
 import exampleClickedAtom from "./chatComponents/stateManager/atoms/exampleClicked";
+import isLanguageAtom from "./chatComponents/stateManager/atoms/isLanguageAtom";
 
 const App = () => {
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
+  // eslint-disable-next-line no-unused-vars
+  const [language, setLanguage] = useRecoilState(isLanguageAtom);
   const { i18n, t } = useTranslation();
   // function for changing languages
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+    setLanguage(lng);
   };
 
   // EXAMPLE OF HOW TO USE RECOIL (ATOM AND SELECTOR) WITH EASE
@@ -85,16 +89,6 @@ const App = () => {
               : "App-header dark-background "
           }
         >
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={handleClickExampleSelector}
-          >
-            <img src={logo} className="App-logo" alt="logo" />
-          </span>
-          <p style={{ fontSize: 17 }}>
-            This is an Recoil Atom & Selector usage example:
-          </p>
-          <p style={{ fontSize: 15 }}>{exampleState}</p>
           <p>
             {t("editAppText")} <code>src/App.js</code> {t("saveAppText")}
           </p>
@@ -106,6 +100,15 @@ const App = () => {
           >
             {t("learnAppText")}
           </a>
+          <br />
+          <span
+            style={{ cursor: "pointer" }}
+            onClick={handleClickExampleSelector}
+          >
+            <img src={logo} className="App-logo" alt="logo" />
+          </span>
+          <p style={{ fontSize: 18 }}>{t("exampleRecoil")}</p>
+          <p style={{ fontSize: 15 }}>{exampleState}</p>
         </header>
       </div>
       <Router>

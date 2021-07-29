@@ -1,16 +1,25 @@
 // THIS ONLY FOR EXAMPLE
 import { selector } from "recoil";
-import exampleAtom from "../atoms/exampleAtom";
+import exampleUsAtom from "../atoms/exampleUsAtom";
 import exampleClickedAtom from "../atoms/exampleClicked";
+import exampleFrAtom from "../atoms/exampleFrAtom";
+import isLanguageAtom from "../atoms/isLanguageAtom";
 
 const exampleSelector = selector({
   key: "exampleSelector",
   get: ({ get }) => {
-    const data = get(exampleAtom);
+    const Englishdata = get(exampleUsAtom);
+    const FrenchData = get(exampleFrAtom);
+    const language = get(isLanguageAtom);
     const clickedExample = get(exampleClickedAtom);
+
     return !clickedExample
-      ? data
-      : "📢 this message is from exampleSelector.js in selector folder 😉";
+      ? language === "en"
+        ? Englishdata
+        : FrenchData
+      : language === "en"
+      ? "📢 this message is from exampleSelector.js in selector folder 😉"
+      : "📢 ce message provient de exampleSelector.js dans le dossier selector 😉 .";
   },
 });
 

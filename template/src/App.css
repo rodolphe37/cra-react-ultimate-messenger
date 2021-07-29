@@ -13,11 +13,15 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  background-color: transparent;
+  box-shadow: none !important;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    /* animation: App-logo-spin infinite 20s linear; */
+    /* transform: translatey(0px); */
+    animation: float 6s ease-in-out infinite;
   }
 }
 
@@ -49,4 +53,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@keyframes float {
+  0% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
+  }
+
+  50% {
+    box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
+    transform: translatey(-20px);
+  }
+
+  100% {
+    box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+    transform: translatey(0px);
+  }
 }
