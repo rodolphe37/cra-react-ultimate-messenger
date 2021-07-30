@@ -18,11 +18,13 @@ import CallIcon from "../../assets/callTo.svg";
 import CallFrom from "../../assets/callFrom.svg";
 import HangUpCall from "../../assets/hang-up.svg";
 import Assignement from "../../assets/assignment.svg";
+import AssignementWhite from "../../assets/assignment-white.svg";
 import Bell from "../../assets/sounds/mixkit-fairy-bells-583.mp3";
+import selectedDarkThemeAtom from "../../stateManager/atoms/selectedDarkThemeAtom";
 
 const VideoChatComponent = () => {
   const [roomName] = useRecoilState(roomIdAtom);
-
+  const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
   const {
     stream,
     myVideo,
@@ -75,7 +77,13 @@ const VideoChatComponent = () => {
         >
           <div
             className={
-              callAccepted || receivingCall ? "myId marginTopContent" : "myId"
+              callAccepted || receivingCall
+                ? selectedDarkTheme
+                  ? "myId marginTopContent dark-background white"
+                  : "myId marginTopContent light-background black"
+                : selectedDarkTheme
+                ? "myId dark-background white"
+                : "myId light-background black"
             }
             style={{ position: "relative" }}
           >
@@ -83,7 +91,11 @@ const VideoChatComponent = () => {
               onClick={() => {
                 window.location.replace(`/chat/${roomName}`);
               }}
-              className="closed-video-chat-cross black"
+              className={
+                selectedDarkTheme
+                  ? "closed-video-chat-cross white"
+                  : "closed-video-chat-cross black"
+              }
             >
               X
             </button>
@@ -146,12 +158,16 @@ const VideoChatComponent = () => {
                   <CopyToClipboard text={`${t("messageInvitation")}${me}`}>
                     <button
                       onClick={() => alert(`Vous avez copié l'Id : ${me} `)}
-                      className="button-video-chat"
+                      className={
+                        selectedDarkTheme
+                          ? "button-video-chat white"
+                          : "button-video-chat black"
+                      }
                       variant="contained"
                       color="primary"
                     >
                       <img
-                        src={Assignement}
+                        src={selectedDarkTheme ? AssignementWhite : Assignement}
                         alt="assigment"
                         style={{ width: 30 }}
                       />{" "}

@@ -45,17 +45,17 @@
   max-width: 410px;
   margin-right: 5rem;
   border-radius: 5px;
-  background: #c9d6ff; /* fallback for old browsers */
+  /* background: #c9d6ff;
   background: -webkit-linear-gradient(
     to right,
     #e2e2e2,
     #c9d6ff
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  );
   background: linear-gradient(
     to right,
     #e2e2e2,
     #c9d6ff
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  );  */
 
   padding: 2rem;
   display: grid;
@@ -71,6 +71,7 @@
   display: grid;
   justify-content: center;
   align-content: center;
+  padding-bottom: 15px;
 }
 
 .caller {
