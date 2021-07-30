@@ -85,9 +85,9 @@ const ChatRoom = (props) => {
     }
     if (isLoaded) {
       //   setIsSoundNotification(false);
-      //   setTimeout(() => {
-      setIsLoaded(false);
-      //   }, 3500);
+      setTimeout(() => {
+        setIsLoaded(false);
+      }, 3500);
       //   setTimeout(() => {
       //     setIsSoundNotification(true);
       //   }, 4600);
