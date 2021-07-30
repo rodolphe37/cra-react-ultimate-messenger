@@ -14,6 +14,7 @@ import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 import "./ChatRoom.css";
 // HOOKS & SERVICES IMPORTS
 import useChat from "../../../hooks/useChat";
+import useVideoChat from "../../../hooks/useVideoChat";
 import UploadService from "../../../services/FileUploadService";
 import useGetUserInfos from "../../../hooks/useGetUserInfos";
 // STATEMANAGMENT IMPORTS
@@ -57,6 +58,7 @@ const ChatRoom = (props) => {
   const [isSoundNotification, setIsSoundNotification] = useRecoilState(
     isSoundNotificationsAtom
   );
+  // const { me } = useVideoChat();
   // if you want to catch roomId from URL
   // const { roomId } = props.match.params; // Gets roomId from URL
 
@@ -591,7 +593,7 @@ const ChatRoom = (props) => {
                 return (
                   <span key={i} className="messages-section">
                     <span>
-                      {!message.ownedByCurrentUser ? (
+                      {!message.ownedByCurrentUser && !openVideoChat ? (
                         <span>
                           {clickedSound1 && (
                             <audio autoPlay>
@@ -601,7 +603,7 @@ const ChatRoom = (props) => {
                         </span>
                       ) : null}
 
-                      {!message.ownedByCurrentUser ? (
+                      {!message.ownedByCurrentUser && !openVideoChat ? (
                         <span>
                           {clickedSound2 && (
                             <audio autoPlay>
