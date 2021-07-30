@@ -496,11 +496,11 @@ const ChatRoom = (props) => {
   useEffect(() => {
     if (messageIdToDelete) {
       onDelete();
-      setIsSoundNotification(false);
+      // setIsSoundNotification(false);
       setMessageIsToDelete("");
-      setIsSoundNotification(true);
+      // setIsSoundNotification(true);
     }
-    console.log("id for button :", idForDeleteButton);
+    // console.log("id for button :", idForDeleteButton);
   }, [messageIdToDelete, idForDeleteButton]);
 
   // END OF DELETE MESSAGE SECTION

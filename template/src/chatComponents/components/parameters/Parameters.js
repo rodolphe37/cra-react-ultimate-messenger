@@ -32,6 +32,7 @@ const Parameters = () => {
   const [isSoundNotification, setIsSoundNotification] = useRecoilState(
     isSoundNotificationsAtom
   );
+
   const [eraseUsername, setEraseUsername] = useState(true);
   const { t } = useTranslation();
   const [validateUsername, setValidateUsername] =
@@ -65,6 +66,8 @@ const Parameters = () => {
     openSoundsZone,
     openThemesZone,
     openPictureZone,
+    isSoundGuitar,
+    isSoundSoftware,
   } = useParams();
 
   const handleValidateUsername = () => {
@@ -96,29 +99,12 @@ const Parameters = () => {
     if (localStorage.getItem("boolLight") !== true || selectedLightTheme) {
       localStorage.setItem("boolLight", selectedLightTheme);
     }
-    if (isSoundNotification) {
-      if (localStorage.getItem("guitar") !== true || clickedSound1) {
-        localStorage.setItem("guitar", clickedSound1);
-      }
-      if (localStorage.getItem("software") !== true || clickedSound2) {
-        localStorage.setItem("software", clickedSound2);
-      }
-      localStorage.setItem("sound", true);
-    }
-    if (isSoundNotification && !clickedSound1 && !clickedSound2) {
-      setClickedSound1(true);
-    }
-    if (!isSoundNotification) {
-      setClickedSound1(false);
-      setClickedSound2(false);
-      localStorage.setItem("sound", false);
-      localStorage.setItem("guitar", false);
-    }
-    if (localStorage.getItem("sound") === false) {
-      setIsSoundNotification(false);
-    }
+
     if (localStorage.getItem("seeMedia") === null) {
       localStorage.setItem("seeMedia", true);
+    }
+    if (JSON.parse(localStorage.getItem("sound")) === false) {
+      setIsSoundNotification(false);
     }
 
     if (!clickedParams) {
@@ -141,6 +127,39 @@ const Parameters = () => {
     openSoundsZone,
     openThemesZone,
     openPictureZone,
+  ]);
+
+  useEffect(() => {
+    if (isSoundNotification) {
+      if (localStorage.getItem("guitar") !== true || clickedSound1) {
+        localStorage.setItem("guitar", clickedSound1);
+      }
+      if (localStorage.getItem("software") !== true || clickedSound2) {
+        localStorage.setItem("software", clickedSound2);
+      }
+      localStorage.setItem("sound", true);
+    }
+    if (isSoundNotification && !clickedSound1 && !clickedSound2) {
+      setClickedSound1(true);
+    }
+    if (!isSoundNotification) {
+      setClickedSound1(false);
+      setClickedSound2(false);
+      localStorage.setItem("sound", false);
+      localStorage.setItem("guitar", false);
+    }
+
+    // if (localStorage.getItem("sound") === true) {
+    //   setIsSoundNotification(true);
+    // }
+    console.log("sound from params", isSoundNotification);
+  }, [
+    isSoundNotification,
+    clickedSound1,
+    clickedSound2,
+    setClickedSound1,
+    setClickedSound2,
+    setIsSoundNotification,
   ]);
 
   return (
@@ -312,7 +331,7 @@ const Parameters = () => {
                         </p>
                       </b>
                     </button>
-                    {clickedParams && isSoundNotification && clickedSound1 && (
+                    {isSoundGuitar && isSoundNotification && clickedSound1 && (
                       <audio autoPlay>
                         <source src={sound} />
                       </audio>
@@ -353,7 +372,7 @@ const Parameters = () => {
                         </p>
                       </b>
                     </button>
-                    {clickedParams && isSoundNotification && clickedSound2 && (
+                    {isSoundSoftware && isSoundNotification && clickedSound2 && (
                       <audio autoPlay>
                         <source src={sound2} />
                       </audio>
@@ -380,7 +399,7 @@ const Parameters = () => {
                       style={{ position: "relative" }}
                       className="select-theme-content sounds"
                     >
-                      {isSoundNotification ? (
+                      {isSoundNotification && (
                         <img
                           style={{
                             width: 24,
@@ -392,7 +411,8 @@ const Parameters = () => {
                           src={Bell}
                           alt="ring"
                         />
-                      ) : (
+                      )}
+                      {!isSoundNotification && (
                         <img
                           style={{
                             width: 24,

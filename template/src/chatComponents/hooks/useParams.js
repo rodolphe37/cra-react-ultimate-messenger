@@ -11,6 +11,7 @@ import clickedSoundSoftwareAtom from "../stateManager/atoms/clickedSoundSoftware
 import dangerZoneAtom from "../stateManager/atoms/dangerZoneAtom";
 import seeMediaAtom from "../stateManager/atoms/seeMediaAtom";
 import roomIdAtom from "../stateManager/atoms/roomIdAtom";
+import isSoundNotificationsAtom from "../stateManager/atoms/isSoundNotifications";
 
 const useParams = () => {
   const [clickedParams, setClickedParams] = useRecoilState(clickedParamsAtom);
@@ -28,13 +29,17 @@ const useParams = () => {
     selectedLightThemeAtom
   );
   const [seingMedia, setSeignMedia] = useRecoilState(seeMediaAtom);
-  const [isSoundNotification, setIsSoundNotification] = useState(true);
+  const [isSoundNotification, setIsSoundNotification] = useRecoilState(
+    isSoundNotificationsAtom
+  );
   const [openDangerZone, setOpenDangerZone] = useRecoilState(dangerZoneAtom);
   const [openSettingsZone, setOpenSettingsZone] = useState(false);
   const [openSoundsZone, setOpenSoundsZone] = useState(false);
   const [openThemesZone, setOpenThemesZone] = useState(false);
   const [openPictureZone, setOpenPictureZone] = useState(false);
   const [roomName] = useRecoilState(roomIdAtom);
+  const [isSoundGuitar, setIsSoundGuitar] = useState(false);
+  const [isSoundSoftware, setIsSoundSoftware] = useState(false);
 
   const toggleTooltip = () => {
     if (clickedParams) {
@@ -108,11 +113,18 @@ const useParams = () => {
   const toggleSoundNotification = () => {
     if (isSoundNotification) {
       setIsSoundNotification(false);
+      localStorage.setItem("sound", false);
     }
     if (!isSoundNotification) {
       setIsSoundNotification(true);
+      localStorage.setItem("sound", true);
     }
+    console.log("sound", isSoundNotification);
   };
+
+  // useEffect(() => {
+  //   console.log("sound", isSoundNotification);
+  // }, [isSoundNotification]);
 
   const handleClickSound1 = () => {
     if (clickedSound1) {
@@ -124,6 +136,10 @@ const useParams = () => {
       setClickedSound2(false);
       setClickedSound1(true);
       setSelectedSound(true);
+      setIsSoundGuitar(true);
+      setTimeout(() => {
+        setIsSoundGuitar(false);
+      }, 2000);
     }
   };
   const handleClickSound2 = () => {
@@ -135,6 +151,10 @@ const useParams = () => {
       setClickedSound1(false);
       setClickedSound2(true);
       setSelectedSound(false);
+      setIsSoundSoftware(true);
+      setTimeout(() => {
+        setIsSoundSoftware(false);
+      }, 2000);
     }
   };
 
@@ -205,6 +225,10 @@ const useParams = () => {
     openSoundsZone,
     openThemesZone,
     openPictureZone,
+    isSoundGuitar,
+    setIsSoundGuitar,
+    isSoundSoftware,
+    setIsSoundSoftware,
   };
 };
 
