@@ -84,13 +84,13 @@ const ChatRoom = (props) => {
       setRoomToken(roomId.roomToken);
     }
     if (isLoaded) {
-      setIsSoundNotification(false);
-      setTimeout(() => {
-        setIsLoaded(false);
-      }, 3500);
-      setTimeout(() => {
-        setIsSoundNotification(true);
-      }, 4600);
+      //   setIsSoundNotification(false);
+      //   setTimeout(() => {
+      setIsLoaded(false);
+      //   }, 3500);
+      //   setTimeout(() => {
+      //     setIsSoundNotification(true);
+      //   }, 4600);
     }
     return () => {
       setRoomToken("");
