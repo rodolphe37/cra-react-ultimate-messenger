@@ -119,6 +119,7 @@ button {
   background-color: #00a2f3ff;
   margin-left: auto;
   font-size: 17px;
+  right: 10px;
 }
 .my-message-name {
   margin-left: auto;
@@ -144,6 +145,7 @@ button {
   background-color: #11c696ff;
   margin-right: auto;
   font-size: 17px;
+  left: 10px;
 }
 
 .send-message-button {
@@ -792,6 +794,33 @@ button {
 .height45 {
   height: auto !important;
   line-height: 2rem;
+}
+.jello {
+  animation: jello-horizontal 0.9s both;
+}
+
+@keyframes jello-horizontal {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1.15, 0.65, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.15, 1);
+  }
+  50% {
+    transform: scale3d(1.05, 0.85, 1);
+  }
+  65% {
+    transform: scale3d(0.95, 1.02, 1);
+  }
+  75% {
+    transform: scale3d(1.02, 0.95, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
 }
 
 /* MODAL CONVERSATION INFOS */

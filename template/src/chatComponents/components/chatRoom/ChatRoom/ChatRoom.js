@@ -650,7 +650,9 @@ const ChatRoom = (props) => {
                       <li
                         style={{ position: "relative" }}
                         className={`message-item ${
-                          isNotAlphaNumeric(message.body) ? "height45" : ""
+                          isNotAlphaNumeric(message.body)
+                            ? "height45 jello"
+                            : ""
                         } ${
                           message.ownedByCurrentUser
                             ? "my-message"
