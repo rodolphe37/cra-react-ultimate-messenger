@@ -18,7 +18,7 @@ const Alert = () => {
   const [clickedAlert, setClickedAlert] = useRecoilState(clickedAlertAtom);
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
   const [isMessages] = useState(JSON.parse(localStorage.getItem("messages")));
-  function direcionarTelaMenorIdade() {
+  function stepConfirm() {
     setClickedAlert(false);
     localStorage.removeItem("messages");
     history.replace("/");
@@ -53,7 +53,7 @@ const Alert = () => {
                 <button
                   onClick={() => {
                     onClose();
-                    direcionarTelaMenorIdade();
+                    stepConfirm();
                   }}
                 >
                   {t("yesButton")}
