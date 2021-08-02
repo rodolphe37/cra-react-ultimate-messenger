@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomeChat from "./chatComponents/components/chatRoom/HomeChat/HomeChat";
 import logo from "./logo.svg";
@@ -17,6 +17,7 @@ import Weather from "./chatComponents/components/weatherComponent/WeatherCompone
 import exampleSelector from "./chatComponents/stateManager/selectors/exampleSelector";
 import exampleClickedAtom from "./chatComponents/stateManager/atoms/exampleClicked";
 import isLanguageAtom from "./chatComponents/stateManager/atoms/isLanguageAtom";
+import Alert from "./chatComponents/customAlert/Alert";
 
 const App = () => {
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
@@ -42,15 +43,32 @@ const App = () => {
       setClickedExample(false);
     }
   };
+  // END OF EXAMPLE RECOIL STATE MANAGMENT
+  const [loadWelcomeAlert, setLoadWelcomeAlert] = useState(true);
+
+  const handleLoadAlert = () => {
+    setTimeout(() => {
+      setLoadWelcomeAlert(false);
+    }, 2000);
+  };
 
   useEffect(() => {
+    handleLoadAlert();
     console.log("selector :", exampleState);
     console.log("clicked :", clickedExample);
   }, [exampleState, clickedExample]);
-  // END OF EXAMPLE RECOIL STATE MANAGMENT
 
   return (
     <Fragment>
+      {!loadWelcomeAlert && (
+        <Alert
+          title={`${t("exampleReUseAlertTitle")}`}
+          subTitle={`${t("exampleReUseAlertMood")}`}
+          confirmMessage={`${t("exampleReUseAlertconfirmMood")}`}
+          buttonYes={`${t("exampleReUseAlertGoesWell")}`}
+          buttonNo={`${t("exampleReUseAlertPissesOff")}`}
+        />
+      )}
       <div className="App">
         <div className="changeLanguague-container">
           <span
@@ -120,6 +138,7 @@ const App = () => {
         <Route path="/load" component={Loader} />
         <Route path="/intro" component={BottomDrawer} />
         <Route path="/meteo" component={Weather} />
+        <Route path="/alert" component={Alert} />
       </Router>
     </Fragment>
   );

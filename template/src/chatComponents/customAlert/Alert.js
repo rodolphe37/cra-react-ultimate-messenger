@@ -10,22 +10,30 @@ import clickedAlertAtom from "./clickedAlertAtom";
 
 import Logo from "../../logo.svg";
 import selectedDarkThemeAtom from "../stateManager/atoms/selectedDarkThemeAtom";
-import { useTranslation } from "react-i18next";
 import activateDeleteConvAtom from "../components/checkboxAlert/activateDeleteConvAtom";
 
-const Alert = () => {
-  const { t } = useTranslation();
+const Alert = ({
+  title,
+  subTitle,
+  erasedBubbles,
+  notErasedBubbles,
+  confirmMessage,
+  buttonYes,
+  buttonNo,
+}) => {
   let history = useHistory();
   // eslint-disable-next-line no-unused-vars
   const [clickedAlert, setClickedAlert] = useRecoilState(clickedAlertAtom);
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
   const [isMessages] = useState(JSON.parse(localStorage.getItem("messages")));
   function stepConfirm() {
-    setClickedAlert(false);
-    if (activateDeleteConv) {
-      localStorage.removeItem("messages");
+    if (clickedAlert) {
+      setClickedAlert(false);
+      if (activateDeleteConv) {
+        localStorage.removeItem("messages");
+      }
+      history.replace("/");
     }
-    history.replace("/");
   }
 
   const [activateDeleteConv, setActivateDeleteConv] = useRecoilState(
@@ -69,13 +77,13 @@ const Alert = () => {
                   alt="logo"
                 />
                 <h1>
-                  {t("alertCloseChatTitle")}{" "}
-                  {isMessages.length > 0 && activateDeleteConv
-                    ? `${t("alertMessIfMessagesList")}`
+                  {title}{" "}
+                  {isMessages && isMessages.length > 0 && activateDeleteConv
+                    ? `${subTitle}`
                     : ""}
                 </h1>
               </div>
-              {isMessages.length > 0 && (
+              {isMessages && isMessages.length > 0 && clickedAlert && (
                 <div className="checkbox-alert">
                   <input
                     className="input-checkbox"
@@ -90,12 +98,12 @@ const Alert = () => {
                   ></label>
                   <p style={{ fontSize: 12, width: 240, marginLeft: 55 }}>
                     {activateDeleteConv
-                      ? "Vos conversations seront effacées"
-                      : "Vos conversations ne seront pas effacées"}
+                      ? `${erasedBubbles}`
+                      : `${notErasedBubbles}`}
                   </p>
                 </div>
               )}
-              <p>{t("confirmActionCloseChat")}</p>
+              <p>{confirmMessage}</p>
               <div className="react-confirm-alert-button-group">
                 <button
                   onClick={() => {
@@ -103,7 +111,7 @@ const Alert = () => {
                     stepConfirm();
                   }}
                 >
-                  {t("yesButton")}
+                  {buttonYes}
                 </button>
                 <button
                   onClick={() => {
@@ -111,7 +119,7 @@ const Alert = () => {
                     onClose();
                   }}
                 >
-                  {t("noButton")}
+                  {buttonNo}
                 </button>
               </div>
             </div>

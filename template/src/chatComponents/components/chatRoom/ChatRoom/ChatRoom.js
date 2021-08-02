@@ -56,6 +56,7 @@ import { useAlert } from "react-alert";
 import activateDeleteConvAtom from "../../checkboxAlert/activateDeleteConvAtom";
 
 const ChatRoom = (props) => {
+  const { t } = useTranslation();
   const alert = useAlert();
   let history = useHistory();
   const messagesEndRef = useRef(null);
@@ -156,7 +157,7 @@ const ChatRoom = (props) => {
   const { response, userInfos, ipAddress, setClickedOnApp } = useGetUserInfos();
   const [callEnded, setCallEnded] = useRecoilState(callEndedAtom);
   const { resetTranscript } = useSpeechRecognition();
-  const { t } = useTranslation();
+
   const [messageForBot, setMessageForBot] = useRecoilState(messageForBotAtom);
 
   const [clickedCopyId, setClickedCopyId] = useState(false);
@@ -521,7 +522,17 @@ const ChatRoom = (props) => {
 
   return (
     <Fragment>
-      {clickedAlert && <Alert />}
+      {clickedAlert && (
+        <Alert
+          title={t("alertCloseChatTitle")}
+          subTitle={`${t("alertMessIfMessagesList")}`}
+          erasedBubbles={`${t("erasedBubbles")}`}
+          notErasedBubbles={`${t("notErasedBubbles")}`}
+          confirmMessage={`${t("confirmActionCloseChat")}`}
+          buttonYes={`${t("yesButton")}`}
+          buttonNo={`${t("noButton")}`}
+        />
+      )}
       <div
         onClick={() => setClickedOnApp(true)}
         className={`${clickedOffChat ? "chat-room-container-closed" : ""}
