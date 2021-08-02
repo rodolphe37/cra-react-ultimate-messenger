@@ -66,9 +66,7 @@ const App = () => {
     }, 2570);
 
     return () => {
-      return () => {
-        sessionStorage.removeItem("welcome");
-      };
+      sessionStorage.removeItem("welcome");
     };
   }, []);
 
