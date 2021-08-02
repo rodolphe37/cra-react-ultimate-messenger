@@ -47,5 +47,12 @@
   "alertCloseChatTitle": "En fermant cette fenêtre vous allez sortir de la room",
   "alertMessIfMessagesList":"et effacer l'historique de vos messages...",
   "confirmActionCloseChat":"Souhaitez vous vraiment faire cette action ?",
-  "youHaveCopiedId":"Vous avez copié l'Id "
+  "youHaveCopiedId":"Vous avez copié l'Id ",
+  "erasedBubbles": "Vos conversations seront effacées",
+  "notErasedBubbles":"Vos conversations ne seront pas effacées",
+  "exampleReUseAlertTitle":"Coucou, comment va ??",
+  "exampleReUseAlertMood":"De quelle humeur es-tu aujourd'hui ?",
+  "exampleReUseAlertconfirmMood":"Confirme ton humeur !",
+  "exampleReUseAlertGoesWell":"ça va bien",
+  "exampleReUseAlertPissesOff":"ça me fais c**** !!!"
 }

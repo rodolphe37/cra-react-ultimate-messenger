@@ -47,5 +47,12 @@
   "alertCloseChatTitle": "By closing this window you will exit the room",
   "alertMessIfMessagesList": "and delete your message history...",
   "confirmActionCloseChat":"Do you really want to do this action?",
-  "youHaveCopiedId":"You have copied the Id"
+  "youHaveCopiedId":"You have copied the Id",
+  "erasedBubbles":"Your conversations will be deleted",
+  "notErasedBubbles":"Your conversations will not be deleted",
+  "exampleReUseAlertTitle":"Hi, how are you?",
+  "exampleReUseAlertMood":"What mood are you in today?",
+  "exampleReUseAlertconfirmMood":"Confirm your mood!",
+  "exampleReUseAlertGoesWell":"it goes well!",
+  "exampleReUseAlertPissesOff":"it p***** me off!!!!!!"
 }
