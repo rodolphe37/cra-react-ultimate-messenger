@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomeChat from "./chatComponents/components/chatRoom/HomeChat/HomeChat";
 import logo from "./logo.svg";
 import "./App.css";
@@ -18,6 +18,7 @@ import exampleSelector from "./chatComponents/stateManager/selectors/exampleSele
 import exampleClickedAtom from "./chatComponents/stateManager/atoms/exampleClicked";
 import isLanguageAtom from "./chatComponents/stateManager/atoms/isLanguageAtom";
 import Alert from "./chatComponents/customAlert/Alert";
+// import clickedOffChatAtom from "./chatComponents/stateManager/atoms/clickedOffChatAtom";
 
 const App = () => {
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
@@ -34,6 +35,7 @@ const App = () => {
   const [exampleState] = useRecoilState(exampleSelector);
   const [clickedExample, setClickedExample] =
     useRecoilState(exampleClickedAtom);
+  // const [clickedOffChat] = useRecoilState(clickedOffChatAtom);
 
   const handleClickExampleSelector = () => {
     if (!clickedExample) {
@@ -58,9 +60,21 @@ const App = () => {
     console.log("clicked :", clickedExample);
   }, [exampleState, clickedExample]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      sessionStorage.setItem("welcome", true);
+    }, 2570);
+
+    return () => {
+      return () => {
+        sessionStorage.removeItem("welcome");
+      };
+    };
+  }, []);
+
   return (
     <Fragment>
-      {!loadWelcomeAlert && (
+      {!loadWelcomeAlert && sessionStorage.getItem("welcome") === null ? (
         <Alert
           title={`${t("exampleReUseAlertTitle")}`}
           subTitle={`${t("exampleReUseAlertMood")}`}
@@ -68,7 +82,7 @@ const App = () => {
           buttonYes={`${t("exampleReUseAlertGoesWell")}`}
           buttonNo={`${t("exampleReUseAlertPissesOff")}`}
         />
-      )}
+      ) : null}
       <div className="App">
         <div className="changeLanguague-container">
           <span
@@ -129,16 +143,37 @@ const App = () => {
           <p style={{ fontSize: 15 }}>{exampleState}</p>
         </header>
       </div>
+
       <Router>
-        <Route path="/" exact component={ButtonChat} />
-        <Route path="/join" component={Join} />
-        <Route path="/home" component={HomeChat} />
-        <Route path="/chat" component={ChatRoom} />
-        <Route path="/video" component={VideoChatComponent} />
-        <Route path="/load" component={Loader} />
-        <Route path="/intro" component={BottomDrawer} />
-        <Route path="/meteo" component={Weather} />
-        <Route path="/alert" component={Alert} />
+        <Switch>
+          <Route path="/" exact>
+            <ButtonChat />
+          </Route>
+          <Route path="/join">
+            <Join />
+          </Route>
+          <Route path="/home">
+            <HomeChat />
+          </Route>
+          <Route path="/chat">
+            <ChatRoom />
+          </Route>
+          <Route path="/video">
+            <VideoChatComponent />
+          </Route>
+          <Route path="/load">
+            <Loader />
+          </Route>
+          <Route path="/intro">
+            <BottomDrawer />
+          </Route>
+          <Route path="/meteo">
+            <Weather />
+          </Route>
+          <Route path="/alert">
+            <Alert />
+          </Route>
+        </Switch>
       </Router>
     </Fragment>
   );

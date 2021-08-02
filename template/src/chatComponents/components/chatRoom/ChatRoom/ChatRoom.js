@@ -54,6 +54,7 @@ import Alert from "../../../customAlert/Alert";
 import clickedAlertAtom from "../../../customAlert/clickedAlertAtom";
 import { useAlert } from "react-alert";
 import activateDeleteConvAtom from "../../checkboxAlert/activateDeleteConvAtom";
+import clickedOffChatAtom from "../../../stateManager/atoms/clickedOffChatAtom";
 
 const ChatRoom = (props) => {
   const { t } = useTranslation();
@@ -130,7 +131,8 @@ const ChatRoom = (props) => {
     senderIdTyping,
     isNotAlphaNumeric,
   } = useChat(roomId); // Creates a websocket and manages messaging
-  const [clickedOffChat, setClickedOffChat] = useState(false);
+  const [clickedOffChat, setClickedOffChat] =
+    useRecoilState(clickedOffChatAtom);
   const [clickedOnName, setClickedOnName] = useState(false);
   const [ownedByMe, setOwnedByMe] = useState(false);
   const [chosenEmoji, setChosenEmoji] = useState(null);
