@@ -53,6 +53,7 @@ import DeleteConvButton from "../../../assets/x-button.svg";
 import Alert from "../../../customAlert/Alert";
 import clickedAlertAtom from "../../../customAlert/clickedAlertAtom";
 import { useAlert } from "react-alert";
+import activateDeleteConvAtom from "../../checkboxAlert/activateDeleteConvAtom";
 
 const ChatRoom = (props) => {
   const alert = useAlert();
@@ -63,6 +64,7 @@ const ChatRoom = (props) => {
   const [isSoundNotification, setIsSoundNotification] = useRecoilState(
     isSoundNotificationsAtom
   );
+
   // const { me } = useVideoChat();
   // if you want to catch roomId from URL
   // const { roomId } = props.match.params; // Gets roomId from URL

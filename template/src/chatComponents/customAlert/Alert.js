@@ -5,11 +5,13 @@ import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import "./alert.css";
+import "../components/checkboxAlert/checkbox-alert.css";
 import clickedAlertAtom from "./clickedAlertAtom";
 
 import Logo from "../../logo.svg";
 import selectedDarkThemeAtom from "../stateManager/atoms/selectedDarkThemeAtom";
 import { useTranslation } from "react-i18next";
+import activateDeleteConvAtom from "../components/checkboxAlert/activateDeleteConvAtom";
 
 const Alert = () => {
   const { t } = useTranslation();
@@ -20,9 +22,34 @@ const Alert = () => {
   const [isMessages] = useState(JSON.parse(localStorage.getItem("messages")));
   function stepConfirm() {
     setClickedAlert(false);
-    localStorage.removeItem("messages");
+    if (activateDeleteConv) {
+      localStorage.removeItem("messages");
+    }
     history.replace("/");
   }
+
+  const [activateDeleteConv, setActivateDeleteConv] = useRecoilState(
+    activateDeleteConvAtom
+  );
+
+  const handleActivateDeleteConv = () => {
+    if (activateDeleteConv) {
+      setActivateDeleteConv(false);
+    }
+    if (!activateDeleteConv) {
+      setActivateDeleteConv(true);
+    }
+  };
+  useEffect(() => {
+    if (activateDeleteConv) {
+      sessionStorage.setItem("noDeleteConv", true);
+    }
+    if (!activateDeleteConv) {
+      sessionStorage.setItem("noDeleteConv", false);
+    }
+    console.log("activate", activateDeleteConv);
+  }, [activateDeleteConv, handleActivateDeleteConv]);
+
   useEffect(() => {
     const confirmDialog = () => {
       confirmAlert({
@@ -43,11 +70,31 @@ const Alert = () => {
                 />
                 <h1>
                   {t("alertCloseChatTitle")}{" "}
-                  {isMessages.length > 0
+                  {isMessages.length > 0 && activateDeleteConv
                     ? `${t("alertMessIfMessagesList")}`
                     : ""}
                 </h1>
               </div>
+              {isMessages.length > 0 && (
+                <div className="checkbox-alert">
+                  <input
+                    className="input-checkbox"
+                    type="checkbox"
+                    name="switch"
+                    id="switch"
+                  />
+                  <label
+                    onClick={handleActivateDeleteConv}
+                    className="label-checkbox"
+                    htmlFor="switch"
+                  ></label>
+                  <p style={{ fontSize: 12, width: 240, marginLeft: 55 }}>
+                    {activateDeleteConv
+                      ? "Vos conversations seront effacées"
+                      : "Vos conversations ne seront pas effacées"}
+                  </p>
+                </div>
+              )}
               <p>{t("confirmActionCloseChat")}</p>
               <div className="react-confirm-alert-button-group">
                 <button
@@ -73,7 +120,7 @@ const Alert = () => {
       });
     };
     confirmDialog();
-  }, []);
+  }, [activateDeleteConv]);
 
   return <div className="container"></div>;
 };
