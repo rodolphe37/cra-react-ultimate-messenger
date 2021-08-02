@@ -71,3 +71,6 @@
     transform: translatey(0px);
   }
 }
+#__react-alert__ > div > div > div {
+  width: 100% !important;
+}

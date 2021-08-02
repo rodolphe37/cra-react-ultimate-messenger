@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 // import { v4 as uuidv4 } from "uuid";
 // CSS IMPORTS
+
 import "./ChatRoom.css";
 // HOOKS & SERVICES IMPORTS
 import useChat from "../../../hooks/useChat";
@@ -49,8 +50,12 @@ import plus from "../../../assets/plus.svg";
 import cloud from "../../../assets/cloudy.svg";
 import Thumb from "../../../assets/thumbs-up-facebook.svg";
 import DeleteConvButton from "../../../assets/x-button.svg";
+import Alert from "../../../customAlert/Alert";
+import clickedAlertAtom from "../../../customAlert/clickedAlertAtom";
+import { useAlert } from "react-alert";
 
 const ChatRoom = (props) => {
+  const alert = useAlert();
   let history = useHistory();
   const messagesEndRef = useRef(null);
   const [roomToken, setRoomToken] = useRecoilState(roomIdAtom);
@@ -102,7 +107,7 @@ const ChatRoom = (props) => {
 
   let roomId = { roomToken };
   const [username, setUsername] = useRecoilState(usernameAtom);
-
+  // const { customAlert, ok } = useCustomAlert();
   const {
     messages,
     setMessages,
@@ -198,6 +203,11 @@ const ChatRoom = (props) => {
     if (e.code === "Enter" || e.code === "NumpadEnter") {
       handleSendMessage();
     }
+  };
+  const [clickedAlert, setClickedAlert] = useRecoilState(clickedAlertAtom);
+
+  const handleClickAlert = () => {
+    setClickedAlert(true);
   };
 
   const handleSendMessage = (e) => {
@@ -509,6 +519,7 @@ const ChatRoom = (props) => {
 
   return (
     <Fragment>
+      {clickedAlert && <Alert />}
       <div
         onClick={() => setClickedOnApp(true)}
         className={`${clickedOffChat ? "chat-room-container-closed" : ""}
@@ -536,7 +547,7 @@ const ChatRoom = (props) => {
             <Parameters />
             <div className="section-right-top-button">
               <button
-                onClick={() => history.push("/")}
+                onClick={handleClickAlert}
                 className={
                   !selectedDarkTheme
                     ? "closed-button-container black"
@@ -782,8 +793,10 @@ const ChatRoom = (props) => {
                                   }
                                   onClick={() => {
                                     setClickedCopyId(true);
-                                    alert(
-                                      `Vous avez copié l'Id ${idChatInvitation}.`
+                                    alert.success(
+                                      `${t(
+                                        "youHaveCopiedId"
+                                      )}: ${idChatInvitation}.`
                                     );
                                   }}
                                 >

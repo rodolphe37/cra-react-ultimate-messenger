@@ -21,8 +21,10 @@ import Assignement from "../../assets/assignment.svg";
 import AssignementWhite from "../../assets/assignment-white.svg";
 import Bell from "../../assets/sounds/mixkit-fairy-bells-583.mp3";
 import selectedDarkThemeAtom from "../../stateManager/atoms/selectedDarkThemeAtom";
+import { useAlert } from "react-alert";
 
 const VideoChatComponent = () => {
+  const alert = useAlert();
   const [roomName] = useRecoilState(roomIdAtom);
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
   const {
@@ -157,7 +159,9 @@ const VideoChatComponent = () => {
                   </p>
                   <CopyToClipboard text={`${t("messageInvitation")}${me}`}>
                     <button
-                      onClick={() => alert(`Vous avez copié l'Id : ${me} `)}
+                      onClick={() =>
+                        alert.success(`${t("youHaveCopiedId")}: ${me}.`)
+                      }
                       className={
                         selectedDarkTheme
                           ? "button-video-chat white"
@@ -254,7 +258,10 @@ const VideoChatComponent = () => {
                 <audio loop autoPlay>
                   <source src={Bell} />
                 </audio>
-                <h1 style={{ fontSize: 14 }}>
+                <h1
+                  className={selectedDarkTheme ? "white" : "black"}
+                  style={{ fontSize: 14 }}
+                >
                   {name} {t("callMessage")}
                 </h1>
                 <button className="call-button-green" onClick={answerCall}>
