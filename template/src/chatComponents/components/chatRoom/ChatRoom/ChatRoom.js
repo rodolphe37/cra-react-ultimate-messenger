@@ -55,6 +55,8 @@ import clickedAlertAtom from "../../../customAlert/clickedAlertAtom";
 import { useAlert } from "react-alert";
 import activateDeleteConvAtom from "../../checkboxAlert/activateDeleteConvAtom";
 import clickedOffChatAtom from "../../../stateManager/atoms/clickedOffChatAtom";
+import VideoChatComponent from "../../videoChatComponent/VideoChatComponent";
+import openVideoChatAtom from "../../../stateManager/atoms/openVideoChatAtom";
 
 const ChatRoom = (props) => {
   const { t } = useTranslation();
@@ -393,13 +395,16 @@ const ChatRoom = (props) => {
     return <div className="dot-typing" />;
   }
 
-  const [openVideoChat, setOpenVideChat] = useState(false);
+  const [openVideoChat, setOpenVideChat] = useRecoilState(openVideoChatAtom);
   const handleVideoChat = () => {
     if (openVideoChat) {
       setOpenVideChat(false);
     }
     if (!openVideoChat) {
       setOpenVideChat(true);
+      // if(window.location.pathname === `"/video/${roomId}`){
+      //   return <VideoChatComponent />
+      // }
     }
   };
 

@@ -18,6 +18,7 @@ import exampleSelector from "./chatComponents/stateManager/selectors/exampleSele
 import exampleClickedAtom from "./chatComponents/stateManager/atoms/exampleClicked";
 import isLanguageAtom from "./chatComponents/stateManager/atoms/isLanguageAtom";
 import Alert from "./chatComponents/customAlert/Alert";
+import roomIdAtom from "./chatComponents/stateManager/atoms/roomIdAtom";
 // import clickedOffChatAtom from "./chatComponents/stateManager/atoms/clickedOffChatAtom";
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
     i18n.changeLanguage(lng);
     setLanguage(lng);
   };
+  const [roomId] = useRecoilState(roomIdAtom);
 
   // EXAMPLE OF HOW TO USE RECOIL (ATOM AND SELECTOR) WITH EASE
   const [exampleState] = useRecoilState(exampleSelector);
@@ -58,7 +60,8 @@ const App = () => {
     handleLoadAlert();
     console.log("selector :", exampleState);
     console.log("clicked :", clickedExample);
-  }, [exampleState, clickedExample]);
+    console.log("roomId :", roomId);
+  }, [exampleState, roomId, clickedExample]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -66,7 +69,9 @@ const App = () => {
     }, 2570);
 
     return () => {
-      sessionStorage.removeItem("welcome");
+      return () => {
+        sessionStorage.removeItem("welcome");
+      };
     };
   }, []);
 
@@ -137,14 +142,14 @@ const App = () => {
           >
             <img src={logo} className="App-logo" alt="logo" />
           </span>
-          <p style={{ fontSize: 18 }}>{t("exampleRecoil")}</p>
-          <p style={{ fontSize: 15 }}>{exampleState}</p>
+          <p style={{ fontSize: 18, maxWidth: 280 }}>{t("exampleRecoil")}</p>
+          <p style={{ fontSize: 15, maxWidth: 280 }}>{exampleState}</p>
         </header>
       </div>
 
       <Router>
         <Switch>
-          <Route path="/" exact>
+          <Route exact path="/">
             <ButtonChat />
           </Route>
           <Route path="/join">
@@ -153,11 +158,11 @@ const App = () => {
           <Route path="/home">
             <HomeChat />
           </Route>
-          <Route path="/chat">
+          <Route path={`/chat/${roomId}`}>
             <ChatRoom />
           </Route>
-          <Route path="/video">
-            <VideoChatComponent />
+          <Route path={`/video/${roomId}`}>
+            <VideoChatComponent roomId={roomId} />
           </Route>
           <Route path="/load">
             <Loader />

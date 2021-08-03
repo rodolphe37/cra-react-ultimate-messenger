@@ -1,5 +1,5 @@
 // MODULES IMPORTS
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useTranslation } from "react-i18next";
@@ -27,6 +27,7 @@ const VideoChatComponent = () => {
   const alert = useAlert();
   const [roomName] = useRecoilState(roomIdAtom);
   const [selectedDarkTheme] = useRecoilState(selectedDarkThemeAtom);
+
   const {
     stream,
     myVideo,
@@ -65,6 +66,10 @@ const VideoChatComponent = () => {
       setClickedInvitation(false);
     }
   };
+
+  useEffect(() => {
+    console.log("me", me);
+  }, [me]);
 
   return (
     <Fragment>
