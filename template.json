@@ -35,7 +35,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "messServInit": "cd messages-and-pictures && yarn install && mkdir images && mv -v .env.example .env ",
+    "messServInit": "cd messages-and-pictures && yarn install && mkdir uploads && mv -v .env.example .env ",
     "frontInit": " mv -v .env.local.example .env.local",
     "startMessServer": "cd messages-and-pictures && yarn start",
     "initAll": "yarn messServInit && yarn frontInit",
