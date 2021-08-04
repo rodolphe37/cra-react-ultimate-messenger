@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 // MODULES IMPORTS
-import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import { useSpeechRecognition } from "react-speech-recognition";
 import { Fragment, useEffect, useState, useRef } from "react";
 import Picker, { SKIN_TONE_MEDIUM_LIGHT } from "emoji-picker-react";
@@ -15,7 +15,6 @@ import { isAndroid, isIOS, isBrowser } from "react-device-detect";
 import "./ChatRoom.css";
 // HOOKS & SERVICES IMPORTS
 import useChat from "../../../hooks/useChat";
-import useVideoChat from "../../../hooks/useVideoChat";
 import UploadService from "../../../services/FileUploadService";
 import useGetUserInfos from "../../../hooks/useGetUserInfos";
 // STATEMANAGMENT IMPORTS
@@ -29,7 +28,6 @@ import fileFromPictureAtom from "../../../stateManager/atoms/fileFromPictureAtom
 import isReceivedMediasMessageToUserAtom from "../../../stateManager/atoms/receiveMediasMessageToUserAtom";
 import speechToTextAtom from "../../../stateManager/atoms/speechToTextAtom";
 import plusSectionAtom from "../../../stateManager/atoms/plusSectionAtom";
-import callEndedAtom from "../../../stateManager/atoms/callEndedAtom";
 import messageForBotAtom from "../../../stateManager/atoms/messageForBotAtom";
 import roomIdAtom from "../../../stateManager/atoms/roomIdAtom";
 import isSoundNotificationsAtom from "../../../stateManager/atoms/isSoundNotifications";
@@ -45,7 +43,6 @@ import Weather from "../../weatherComponent/WeatherComponent";
 import Bavarder from "../../../assets/chat.svg";
 import sound from "../../../assets/sounds/mixkit-guitar-notification-alert-2320.mp3";
 import sound2 from "../../../assets/sounds/mixkit-software-interface-back-2575.mp3";
-import VideoCall from "../../../assets/video-chat-icon.svg";
 import plus from "../../../assets/plus.svg";
 import cloud from "../../../assets/cloudy.svg";
 import Thumb from "../../../assets/thumbs-up-facebook.svg";
@@ -53,37 +50,14 @@ import DeleteConvButton from "../../../assets/x-button.svg";
 import Alert from "../../../customAlert/Alert";
 import clickedAlertAtom from "../../../customAlert/clickedAlertAtom";
 import { useAlert } from "react-alert";
-import activateDeleteConvAtom from "../../checkboxAlert/activateDeleteConvAtom";
 import clickedOffChatAtom from "../../../stateManager/atoms/clickedOffChatAtom";
-import VideoChatComponent from "../../videoChatComponent/VideoChatComponent";
-import openVideoChatAtom from "../../../stateManager/atoms/openVideoChatAtom";
 
 const ChatRoom = (props) => {
   const { t } = useTranslation();
-  const alert = useAlert();
-  let history = useHistory();
+
   const messagesEndRef = useRef(null);
   const [roomToken, setRoomToken] = useRecoilState(roomIdAtom);
   const [isLoaded, setIsLoaded] = useState(true);
-  const [isSoundNotification, setIsSoundNotification] = useRecoilState(
-    isSoundNotificationsAtom
-  );
-
-  // const { me } = useVideoChat();
-  // if you want to catch roomId from URL
-  // const { roomId } = props.match.params; // Gets roomId from URL
-
-  // USE UUIDV4 FOR GENERATE ID ROOM FOR CHAT IF YOU WANT
-  // useEffect(() => {
-  //   if (!roomToken) {
-  //     setRoomToken(uuidv4());
-  //   }else{
-
-  //   }
-  //   return () => {
-  //     setRoomToken("");
-  //   };
-  // }, []);
 
   useEffect(() => {
     if (!roomToken && sessionStorage.getItem("roomName") !== null) {
@@ -159,13 +133,10 @@ const ChatRoom = (props) => {
   const [speechToTextConversion, setSpeechToTextConversion] =
     useRecoilState(speechToTextAtom);
   const { response, userInfos, ipAddress, setClickedOnApp } = useGetUserInfos();
-  const [callEnded, setCallEnded] = useRecoilState(callEndedAtom);
   const { resetTranscript } = useSpeechRecognition();
 
   const [messageForBot, setMessageForBot] = useRecoilState(messageForBotAtom);
 
-  const [clickedCopyId, setClickedCopyId] = useState(false);
-  const [idChatInvitation, setIdChatInvitation] = useState("");
   const [toggleDeleteButton, setToggleDeleteButton] = useState(false);
   const [isSendThumb, setIsSendThumb] = useState(false);
 
@@ -178,12 +149,6 @@ const ChatRoom = (props) => {
   useEffect(() => {
     if (messages.length >= 4) {
       scrollToBottom();
-    }
-    if (clickedCopyId) {
-      messages.pop();
-      setTimeout(() => {
-        window.location.replace(`/video/${roomToken}`);
-      }, 1200);
     }
   }, [messages, userAllInfos]);
 
@@ -343,16 +308,6 @@ const ChatRoom = (props) => {
       setFilePictFromList(isImageList.imageInfos.map((resLink) => resLink));
       setFilePictFromMess(messages.map((resBody) => resBody.body));
     }
-    let someMess = messages.map((res) =>
-      res.body.includes("Invitation vidéo, copiez l'id afin de vous connecter:")
-    );
-
-    if (someMess.includes(true)) {
-      // console.log("id for chat:", idChatInvitation);
-      messages.map((message, i) =>
-        setIdChatInvitation(message.body.split(":").pop())
-      );
-    }
 
     allInfos();
     sessionStorage.setItem("infos user", JSON.stringify(userAllInfos));
@@ -394,19 +349,6 @@ const ChatRoom = (props) => {
     }
     return <div className="dot-typing" />;
   }
-
-  const [openVideoChat, setOpenVideChat] = useRecoilState(openVideoChatAtom);
-  const handleVideoChat = () => {
-    if (openVideoChat) {
-      setOpenVideChat(false);
-    }
-    if (!openVideoChat) {
-      setOpenVideChat(true);
-      // if(window.location.pathname === `"/video/${roomId}`){
-      //   return <VideoChatComponent />
-      // }
-    }
-  };
 
   useEffect(() => {
     if (speechToTextConversion !== "") {
@@ -594,7 +536,7 @@ const ChatRoom = (props) => {
             </div>
           </div>
         </span>
-        {openVideoChat && window.location.replace(`/video/${roomToken}`)}
+
         {isLoaded ? (
           <div
             className={`${
@@ -624,7 +566,7 @@ const ChatRoom = (props) => {
                 return (
                   <span key={i} className="messages-section">
                     <span>
-                      {!message.ownedByCurrentUser && !openVideoChat ? (
+                      {!message.ownedByCurrentUser ? (
                         <span>
                           {clickedSound1 && (
                             <audio autoPlay>
@@ -634,7 +576,7 @@ const ChatRoom = (props) => {
                         </span>
                       ) : null}
 
-                      {!message.ownedByCurrentUser && !openVideoChat ? (
+                      {!message.ownedByCurrentUser ? (
                         <span>
                           {clickedSound2 && (
                             <audio autoPlay>
@@ -799,36 +741,7 @@ const ChatRoom = (props) => {
                           !message.body.includes("thumbs-up-facebook.svg") &&
                           message.body
                         )}
-                        {message.body.includes("Invitation vidéo") ||
-                        message.body.includes("Video invitation")
-                          ? !message.ownedByCurrentUser &&
-                            (!clickedCopyId ? (
-                              <CopyToClipboard text={idChatInvitation}>
-                                <button
-                                  disabled={clickedCopyId ? true : false}
-                                  className={
-                                    clickedCopyId
-                                      ? "idForCallInvitation-clicked"
-                                      : "idForCallInvitation"
-                                  }
-                                  onClick={() => {
-                                    setClickedCopyId(true);
-                                    alert.success(
-                                      `${t(
-                                        "youHaveCopiedId"
-                                      )}: ${idChatInvitation}.`
-                                    );
-                                  }}
-                                >
-                                  Copiez
-                                </button>
-                              </CopyToClipboard>
-                            ) : (
-                              <Fragment>
-                                <p>Le chat vidéo est entrain de démarrer...</p>
-                              </Fragment>
-                            ))
-                          : null}
+
                         {message.body.includes("thumbs-up-facebook.svg") && (
                           <img
                             className="shake-bottom"
@@ -965,18 +878,6 @@ const ChatRoom = (props) => {
             <img style={{ width: 25 }} src={plus} alt="plus" />
           </div>
           <div className="bottom-left-chat">
-            <img
-              onClick={handleVideoChat}
-              style={{
-                width: 28,
-                marginRight: 15,
-                cursor: "pointer",
-                marginTop: -5,
-              }}
-              src={VideoCall}
-              alt="call"
-              className={plusSection ? "" : "hiddenParams"}
-            />
             <div className={plusSection ? "upload-container" : "hiddenParams"}>
               <UploadImage
                 setIsTaping={setIsTaping}

@@ -8,7 +8,6 @@ import Join from "./chatComponents/components/Join/Join";
 import ButtonChat from "./chatComponents/components/ButtonChat";
 import { useRecoilState } from "recoil";
 import selectedDarkThemeAtom from "./chatComponents/stateManager/atoms/selectedDarkThemeAtom";
-import VideoChatComponent from "./chatComponents/components/videoChatComponent/VideoChatComponent";
 import Loader from "./chatComponents/components/loader/Loader";
 import { useTranslation } from "react-i18next";
 import BottomDrawer from "./chatComponents/components/bottomDrawer/BottomDrawer";
@@ -160,9 +159,6 @@ const App = () => {
           </Route>
           <Route path={`/chat/${roomId}`}>
             <ChatRoom />
-          </Route>
-          <Route path={`/video/${roomId}`}>
-            <VideoChatComponent roomId={roomId} />
           </Route>
           <Route path="/load">
             <Loader />

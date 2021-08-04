@@ -35,13 +35,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "messServInit": "cd backends/messages-and-pictures && yarn install && mkdir images && mv -v .env.example .env ",
-    "chatVidInit": " cd backends/video-chat && yarn install && mv -v .env.example .env",
+    "messServInit": "cd messages-and-pictures && yarn install && mkdir images && mv -v .env.example .env ",
     "frontInit": " mv -v .env.local.example .env.local",
-    "startMessServer": "cd backends/messages-and-pictures && yarn start",
-    "startVidServer": "cd backends/video-chat && npm run dev",
-    "initAll": "yarn messServInit && yarn chatVidInit && yarn frontInit",
-    "dev": "cd backends && cd messages-and-pictures && npm start && cd .. & npm run startVidServer & npm start"
+    "startMessServer": "cd messages-and-pictures && yarn start",
+    "initAll": "yarn messServInit && yarn frontInit",
+    "dev": " cd messages-and-pictures && npm start && cd .. & npm start"
 
   },
    "eslintConfig": {

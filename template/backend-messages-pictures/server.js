@@ -30,10 +30,12 @@ io.on("connection", (socket) => {
 
   // Listen start typing events
   socket.on(START_TYPING_MESSAGE_EVENT, (data) => {
+    console.log("Received true on server :", data);
     io.in(roomId).emit(START_TYPING_MESSAGE_EVENT, data);
   });
   // Listen stop typing events
   socket.on(STOP_TYPING_MESSAGE_EVENT, (data) => {
+    console.log("Received false on server :", data);
     io.in(roomId).emit(STOP_TYPING_MESSAGE_EVENT, data);
   });
 
