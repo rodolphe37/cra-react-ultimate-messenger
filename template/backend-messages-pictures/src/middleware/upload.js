@@ -5,7 +5,7 @@ const multer = require("multer");
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // eslint-disable-next-line no-undef
-    cb(null, __basedir + "/resources/static/assets/uploads/");
+    cb(null, __basedir + "/uploads/");
   },
   filename: (req, file, cb) => {
     console.log(file.originalname);
