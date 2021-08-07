@@ -30,6 +30,11 @@ const App = () => {
     i18n.changeLanguage(lng);
     setLanguage(lng);
   };
+  // Natif hook for loading during the render of the app page i18n language in language global state
+  useEffect(() => {
+    setLanguage(i18n.language);
+    console.log("lng :", language);
+  }, [language, setLanguage, i18n]);
   const [roomId] = useRecoilState(roomIdAtom);
 
   // EXAMPLE OF HOW TO USE RECOIL (ATOM AND SELECTOR) WITH EASE
